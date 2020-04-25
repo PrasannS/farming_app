@@ -25,7 +25,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
       body: _pageOptions[_selectedTab],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
