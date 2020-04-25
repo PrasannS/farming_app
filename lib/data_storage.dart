@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farming_app/screens/produce_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -78,20 +79,28 @@ class Database{
                                       ),
                                     ),
                                     SizedBox(width: 20.0,),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(docs[i]['type'], style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
-                                          SizedBox(height: 10.0,),
-                                          Text('Sunflower seeds that will grow into sunflowers', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
-                                          SizedBox(height: 15.0,),
-                                          Text('\$${docs[i]['price']}/gram', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
-                                          SizedBox(height: 15.0,),
-                                          Text('10 - 20 days to grow', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),)
-                                        ],
+                                    FlatButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => ProduceScreen()),
+                                        );
+                                      },
+                                      child: Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(docs[i]['type'], style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
+                                            SizedBox(height: 10.0,),
+                                            Text('Sunflower seeds that will grow into sunflowers', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
+                                            SizedBox(height: 15.0,),
+                                            Text('\$${docs[i]['price']}/gram', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                                            SizedBox(height: 15.0,),
+                                            Text('10 - 20 days to grow', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),)
+                                          ],
+                                        ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               )

@@ -183,6 +183,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           "email":emailInputController.text,
                                           "uid":currentUser.user.uid,
                                           "posts": [],
+                                          "shoppingCart": {''}
                                         });
                                         userid = currentUser.user.uid;
                                       });
