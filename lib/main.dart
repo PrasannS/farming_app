@@ -1,4 +1,4 @@
-import 'package:farming_app/views/entry_screen.dart';
+import 'package:farming_app/screens/entry_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

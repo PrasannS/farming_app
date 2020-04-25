@@ -1,4 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:farming_app/screens/home_screen.dart';
+import 'package:farming_app/screens/marketplace_screen.dart';
+import 'package:farming_app/screens/profile_screen.dart';
+import 'package:farming_app/screens/todo_screen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,8 +16,10 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedTab = 0;
   var _pageOptions = [
-//TODO ADD ALL THE PAGES
-
+    HomeScreen(),
+    MarketplaceScreen(),
+    TodoScreen(),
+    ProfileScreen()
   ];
 
   @override
