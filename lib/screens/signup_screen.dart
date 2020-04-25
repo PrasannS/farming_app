@@ -182,10 +182,11 @@ class _SignupScreenState extends State<SignupScreen> {
                                                 .child("photos/${Path.basename(_image.path)}")
                                                 .getDownloadURL();
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
-                                          "name":nameInputController.text,
-                                          "email":emailInputController.text,
-                                          "uid":currentUser.user.uid,
-                                          "url":pic_url
+                                          'name': nameInputController.text,
+                                          'url': pic_url,
+                                          'email': emailInputController.text,
+                                          'posts': [],
+                                          'rating': 0,
                                         });
                                       });
                                   Navigator.push(

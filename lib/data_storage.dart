@@ -6,19 +6,6 @@ class Database{
 
   FirebaseUser user;
 
-  createUser(String name, String email, String password, String url) {
-    FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value) {
-      Firestore.instance.collection('users').document(value.user.uid).setData({
-        'name': name,
-        'url': url,
-        'email': email,
-        'posts': [],
-        'rating': 0,
-      });
-      user = value.user;
-    });
-  }
-
   createPost(double price, int fresh, AssetImage image, String imageURL, int count, int day, int month, int year, AssetImage img) async {
     user = await FirebaseAuth.instance.currentUser();
     DocumentReference uploadRef = await Firestore.instance.collection('posts').add({
