@@ -61,7 +61,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/weed.jpg
-    - assest/img/
+    - assets/img/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
