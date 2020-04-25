@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
+import 'package:farming_app/models/Weather.dart';
 
 class TodoScreen extends StatefulWidget {
   @override
@@ -69,8 +70,8 @@ class _TodoScreenState extends State<TodoScreen> {
         var data = json.decode(value.body);
         print(data);
         for (int i = 0; i < data.length; i++) {
-          print(
-              'Time: ${DateTime.parse(data[i]['observation_time']['value']).toLocal()} | Precipitation: ${data[i]['precipitation']['value']} ${data[i]['precipitation']['units']}');
+          Weather weather = Weather.fromJson(data[i]);
+          print('Time: ${weather.observation_time} Precipitation: ${weather.precipitation_value} ${weather.precipitation_units}');
         }
       });
     }
