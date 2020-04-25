@@ -174,25 +174,22 @@ class _SignupScreenState extends State<SignupScreen> {
                           SizedBox(height: 50.0),
                           GestureDetector(
                               onTap: () {
-                                  print("HELLO");
+                                String userid;
+                                  print("pass");
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
                                           (currentUser) async {
-                                            String pic_url = await FirebaseStorage.instance
-                                                .ref()
-                                                .child("photos/${Path.basename(_image.path)}")
-                                                .getDownloadURL();
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
-                                          'name': nameInputController.text,
-                                          'url': pic_url,
-                                          'email': emailInputController.text,
-                                          'posts': [],
-                                          'rating': 0,
+                                          "name":nameInputController.text,
+                                          "email":emailInputController.text,
+                                          "uid":currentUser.user.uid,
+                                          "posts": [],
                                         });
+                                        userid = currentUser.user.uid;
                                       });
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => MainPage()),
-                                  );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => MainPage()),
+                                );
                               },
                               child: Container(
                                 height: 50.0,
