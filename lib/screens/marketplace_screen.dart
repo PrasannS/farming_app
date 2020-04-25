@@ -2,6 +2,8 @@ import 'package:farming_app/screens/produce_market.dart';
 import 'package:farming_app/screens/seed_market.dart';
 import 'package:flutter/material.dart';
 
+import 'checkout_screen.dart';
+
 class MarketplaceScreen extends StatefulWidget {
   @override
   _MarketplaceScreenState createState() => _MarketplaceScreenState();
@@ -26,7 +28,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                 Text('Marketplace', style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
                 IconButton(
                   icon: Icon(Icons.shopping_cart, size: 30.0,),
-                  onPressed: (){},
+                  onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen())),
                 ),
               ],
             ),
