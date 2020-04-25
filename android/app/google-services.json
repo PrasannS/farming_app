@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "127300903984",
-    "firebase_url": "https://farming-app-78eb6.firebaseio.com",
-    "project_id": "farming-app-78eb6",
-    "storage_bucket": "farming-app-78eb6.appspot.com"
+    "project_number": "210209959346",
+    "firebase_url": "https://farmingplants.firebaseio.com",
+    "project_id": "farmingplants",
+    "storage_bucket": "farmingplants.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:127300903984:android:84694bd95312698112f9f5",
+        "mobilesdk_app_id": "1:210209959346:android:1ef491dbaa9d26596508ab",
         "android_client_info": {
           "package_name": "org.crhsidea.farming_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "127300903984-37l9krlo2fiio0kbuqctfj97er08c4qk.apps.googleusercontent.com",
+          "client_id": "210209959346-fmqomp5no247n2ea2rrof270fepnvh6f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCf718HhvKDKuLRVSQ_VzsTGThM6otT4LQ"
+          "current_key": "AIzaSyAZ-4AGmH4SwLRtU3L-UU0vBkpJe4LyN18"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "127300903984-37l9krlo2fiio0kbuqctfj97er08c4qk.apps.googleusercontent.com",
+              "client_id": "210209959346-fmqomp5no247n2ea2rrof270fepnvh6f.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
