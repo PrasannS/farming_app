@@ -177,15 +177,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                   print("HELLO");
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
                                           (currentUser) async {
-                                            String pic_url = await FirebaseStorage.instance
-                                                .ref()
-                                                .child("photos/${Path.basename(_image.path)}")
-                                                .getDownloadURL();
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
                                           "name":nameInputController.text,
                                           "email":emailInputController.text,
                                           "uid":currentUser.user.uid,
-                                          "url":pic_url
                                         });
                                       });
                                   Navigator.push(
