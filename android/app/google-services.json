@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "127300903984",
+    "firebase_url": "https://farming-app-78eb6.firebaseio.com",
+    "project_id": "farming-app-78eb6",
+    "storage_bucket": "farming-app-78eb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127300903984:android:84694bd95312698112f9f5",
+        "android_client_info": {
+          "package_name": "org.crhsidea.farming_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127300903984-37l9krlo2fiio0kbuqctfj97er08c4qk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCf718HhvKDKuLRVSQ_VzsTGThM6otT4LQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127300903984-37l9krlo2fiio0kbuqctfj97er08c4qk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
