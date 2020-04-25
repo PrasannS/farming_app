@@ -1,4 +1,4 @@
-import 'package:farming_app/views/main_screen.dart';
+import 'package:farming_app/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

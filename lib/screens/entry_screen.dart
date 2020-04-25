@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:farming_app/views/login_screen.dart';
-import 'package:farming_app/views/signup_screen.dart';
+import 'package:farming_app/screens/login_screen.dart';
+import 'package:farming_app/screens/signup_screen.dart';
 
 class EntryScreen extends StatefulWidget {
   @override
