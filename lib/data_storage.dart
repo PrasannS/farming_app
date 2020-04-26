@@ -39,6 +39,7 @@ class Database{
         }
         else {
           List<DocumentSnapshot> docs = snapshot.data.documents;
+          print(docs);
           return Container(
             child: ListView.builder(
                 itemCount: docs.length,
@@ -111,7 +112,7 @@ class Database{
                     );
                   }
                   else{
-                    return null;
+                    return SizedBox.shrink();
                   }
                 }
             ),
