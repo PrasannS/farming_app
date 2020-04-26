@@ -14,6 +14,7 @@ class _SignupWidgetState extends State<SignupWidget> {
   TextEditingController nameInputController;
   TextEditingController emailInputController;
   TextEditingController passwordInputController;
+  TextEditingController addressInputController;
 
 
   @override
@@ -22,6 +23,7 @@ class _SignupWidgetState extends State<SignupWidget> {
     nameInputController = new TextEditingController();
     emailInputController = new TextEditingController();
     passwordInputController = new TextEditingController();
+    addressInputController = new TextEditingController();
   }
 
   String emailValidator(String value) {
@@ -182,11 +184,40 @@ class _SignupWidgetState extends State<SignupWidget> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 20.0,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              decoration: StyleConstants.loginBoxDecorationStyle,
+                              height: 60.0,
+                              child: TextFormField(
+                                controller: addressInputController,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'OpenSans',
+                                ),
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(top: 14.0),
+                                  prefixIcon: Icon(
+                                    Icons.home,
+                                    color: Colors.black,
+                                  ),
+                                  hintText: 'Enter your Address',
+                                  hintStyle: StyleConstants.loginHintTextStyle,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
 
                     //SizedBox(height: MediaQuery.of(context).size.height / 5,),
-                    SizedBox(height: 40.0,),
+                    SizedBox(height: 30.0,),
 
                     GestureDetector(
                       onTap: () {
@@ -197,6 +228,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                                 "name":nameInputController.text,
                                 "email":emailInputController.text,
                                 "uid":currentUser.user.uid,
+                                'address': addressInputController.text,
                               });
                             });
                         Navigator.push(

@@ -20,6 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController nameInputController;
   TextEditingController emailInputController;
   TextEditingController passwordInputController;
+  TextEditingController addressInputController;
 
   File _image;
 
@@ -29,6 +30,7 @@ class _SignupScreenState extends State<SignupScreen> {
     nameInputController = new TextEditingController();
     emailInputController = new TextEditingController();
     passwordInputController = new TextEditingController();
+    addressInputController = new TextEditingController();
   }
 
   Future getImage() async {
@@ -110,7 +112,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
 
                 Container(
-                    padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+                    padding: EdgeInsets.only(top: 0.0, left: 20.0, right: 20.0),
                     child: Form(
                       key: _signUpFormKey,
                       child: Column(
@@ -172,6 +174,28 @@ class _SignupScreenState extends State<SignupScreen> {
                             obscureText: true,
                             validator: passwordValidator,
                           ),
+                          SizedBox(height: 10.0,),
+                          TextFormField(
+                            style: TextStyle(
+                                color: Colors.black
+                            ),
+                            controller: addressInputController,
+                            decoration: InputDecoration(
+                                labelText: 'ADDRESS',
+                                labelStyle: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey),
+                                // hintText: 'EMAIL',
+                                // hintStyle: ,
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.green))),
+                            validator: (value) {
+                              if (value.length < 5) {
+                                return 'Must be a valid address';
+                              }
+                            },
+                          ),
                           SizedBox(height: 50.0),
                           GestureDetector(
                               onTap: () {
@@ -182,6 +206,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           "name":nameInputController.text,
                                           "email":emailInputController.text,
                                           "uid":currentUser.user.uid,
+                                          'address': addressInputController.text,
                                           "posts": [],
                                           "cartItems": [],
                                           "cartQuantity": [],
