@@ -1,4 +1,5 @@
 import 'package:farming_app/screens/plant_details.dart';
+import 'package:farming_app/screens/plantinfo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -16,7 +17,7 @@ class PlantCard extends StatelessWidget {
       padding: EdgeInsets.all(4),
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_)=> PlantDetails()));
+          Navigator.push(context, MaterialPageRoute(builder: (_)=> PlantInfoScreen()));
         },
         child: Container(
           decoration: BoxDecoration(
