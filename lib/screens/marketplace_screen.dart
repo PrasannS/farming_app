@@ -46,7 +46,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                 onTap: () {
                   setState(() {
                     pageIndex = 0;
-                    _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.linear);
+                    _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.easeInOutSine);
                   });
                 },
                 child: Text(
@@ -64,7 +64,7 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                 onTap: (){
                   setState(() {
                     pageIndex = 1;
-                    _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.linear);
+                    _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.easeInOutSine);
                     //Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
                   });
                 },

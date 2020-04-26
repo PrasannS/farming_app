@@ -2,6 +2,7 @@ import 'package:farming_app/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -111,6 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       (currentUser) {
                                     Firestore.instance.collection('users').document(currentUser.user.uid).get().then(
                                             (value) {
+                                              userid = currentUser.user.uid;
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(builder: (context) => (MainPage())),
