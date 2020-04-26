@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farming_app/models/plant.dart';
 import 'package:farming_app/models/user.dart';
+import 'package:farming_app/screens/add_plant_screen.dart';
 import 'package:farming_app/widgets/famousCard.dart';
 import 'package:farming_app/widgets/searchBar.dart';
 import 'package:farming_app/widgets/welcomeBar.dart';
@@ -82,6 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AddPlantScreen())),
+      ),
       body: SafeArea(
         child: ListView(
           children: [
