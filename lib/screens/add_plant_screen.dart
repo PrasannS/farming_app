@@ -66,6 +66,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
       'desc': _descriptionController.text.toString(),
       'datePlanted': _plantedDate,
       'produce': false,
+      'planted': false,
       'uid': currentUserId,
       'type': _captionController.text.toString(),
       'price': double.parse(_priceController.text.toString()),

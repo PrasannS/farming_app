@@ -31,7 +31,7 @@ class PurchaseCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Stack(
               children: [
-                Image.asset("assets/images/weed.jpg",
+                Image.asset("assets/images/bananas.jpg",
                   height: 220,
                   width: 250,
                   fit: BoxFit.cover,),

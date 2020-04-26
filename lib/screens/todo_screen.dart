@@ -11,6 +11,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:farming_app/models/Weather.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TodoScreen extends StatefulWidget {
   @override
@@ -58,8 +59,8 @@ class _TodoScreenState extends State<TodoScreen> {
   void initState() {
     super.initState();
 
-    getData();
     getRainfall();
+    getData();
   }
 
   Future getProduceData() async {
@@ -78,7 +79,7 @@ class _TodoScreenState extends State<TodoScreen> {
             .document(currentUser.data['posts'][i])
             .get();
         produce_names.add(eachPost.data['type']);
-        toPlant.add(eachPost.data['produce']);
+        toPlant.add(!eachPost.data['planted']);
       }
     }
     setState(() {});
@@ -126,6 +127,20 @@ class _TodoScreenState extends State<TodoScreen> {
         ),
         SizedBox(
           height: 30.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            new RichText(
+              textAlign: TextAlign.right,
+              text: new TextSpan(
+                  text: 'Powered by ClimaCell',
+                  style: new TextStyle(color: Colors.black,),
+                  recognizer: new TapGestureRecognizer()
+                    ..onTap = () { launch('https://www.climacell.co/');
+                    }
+              ),),
+          ],
         ),
         Expanded(
           child: Container(
