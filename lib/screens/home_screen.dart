@@ -144,11 +144,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            usersloaded?Flexible(
-              child: Container(
-                width: 200*users.length*1.0,
+            usersloaded?
+               Container(
+                height: 110*users.length*1.0,
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
+                    physics: NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
                     itemCount: users.length,
                     itemBuilder: (_, index) {
                       print("HELLOOOOOO");
@@ -160,8 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-              ),
-            ):
+              ):
             Center(child: CircularProgressIndicator(),),
           ],
         ),
