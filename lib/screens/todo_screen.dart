@@ -46,6 +46,8 @@ class _TodoScreenState extends State<TodoScreen> {
   List<List<double>> ranges = [];
   bool fullyloaded = false;
 
+  List<bool> icons = [];
+
   @override
   void initState() {
     super.initState();
@@ -53,6 +55,8 @@ class _TodoScreenState extends State<TodoScreen> {
     getRainfall();
     getData();
   }
+
+
 
   Future getProduceData() async {
     await FirebaseAuth.instance.currentUser().then((value) {
@@ -82,6 +86,11 @@ class _TodoScreenState extends State<TodoScreen> {
   Future getData() async {
     await getProduceData();
     await getRanges();
+    for (int i = 0; i<produce_names.length; i++){
+      setState(() {
+        icons.add(false);
+      });
+    }
     setState(() {
       fullyloaded = true;
     });
@@ -242,7 +251,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                     children: [
                                       IconButton(
                                         icon:
-                                            Icon(Icons.radio_button_unchecked),
+                                            Icon(icons[index]?Icons.radio_button_checked:Icons.radio_button_unchecked),
                                         onPressed: () async {
                                           DocumentSnapshot currentPlant = await Firestore.instance.collection('posts').document(produce_id[index]).get();
                                           if (toPlant[index]) {
