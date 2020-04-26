@@ -19,16 +19,6 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  List dayTasks = [
-    'water the tomatos',
-    'plant the tpotatoes',
-    'water the weed',
-    'harvest the weed',
-    'water the tomatos',
-    'plant the tpotatoes',
-    'water the weed',
-    'harvest the weed'
-  ];
   List weekTasks = [
     'weektask1',
     'weektask12',
@@ -50,6 +40,7 @@ class _TodoScreenState extends State<TodoScreen> {
   //TODO list of booleans to fil up, and string names of the produce. If smth is toPlant then it will take to YT Page
   List<bool> toPlant = [];
   List<String> produce_names = [];
+  List<String> produce_id = new List();
 
   //ranges of how much water to give.
   List<List<double>> ranges = [];
@@ -78,8 +69,11 @@ class _TodoScreenState extends State<TodoScreen> {
             .collection('posts')
             .document(currentUser.data['posts'][i])
             .get();
-        produce_names.add(eachPost.data['type']);
-        toPlant.add(!eachPost.data['planted']);
+        if (!eachPost.data['planted']) {
+          produce_names.add(eachPost.data['type']);
+          toPlant.add(!eachPost.data['planted']);
+          produce_id.add(eachPost.documentID);
+        }
       }
     }
     setState(() {});
@@ -93,7 +87,6 @@ class _TodoScreenState extends State<TodoScreen> {
     });
   }
 
-  //TODO set up so that the expected rainfall in inches is subtracted.
   Future getRanges() async {
     for (int i = 0; i < toPlant.length; i++) {
       await fetchWaterResult(produce_names[i]).then((value) {
@@ -250,8 +243,18 @@ class _TodoScreenState extends State<TodoScreen> {
                                       IconButton(
                                         icon:
                                             Icon(Icons.radio_button_unchecked),
-                                        onPressed: () {
-                                          //TODO What happens when a task is completed?
+                                        onPressed: () async {
+                                          DocumentSnapshot currentPlant = await Firestore.instance.collection('posts').document(produce_id[index]).get();
+                                          if (toPlant[index]) {
+                                            currentPlant.reference.updateData({
+                                              'planted': true,
+                                            });
+                                          }
+                                          else {
+                                            currentPlant.reference.updateData({
+                                              'watered': DateTime.now(),
+                                            });
+                                          }
                                         },
                                       ),
                                       GestureDetector(
@@ -296,7 +299,6 @@ class _TodoScreenState extends State<TodoScreen> {
     );
   }
 
-  //TODO set up to get inches of rainfall predicted for the rest of the week
   Future<double> getRainfall() async {
     PermissionStatus status = await Permission.locationWhenInUse.status;
     if (status.isUndetermined) {
