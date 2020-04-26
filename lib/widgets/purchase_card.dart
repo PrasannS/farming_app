@@ -1,23 +1,22 @@
-import 'package:farming_app/screens/plant_details.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class PlantCard extends StatelessWidget {
+class PurchaseCard extends StatelessWidget {
 
   final String name;
   final String picture;
-  final double progress;
+  final double price;
+  final double rating;
 
-  const PlantCard({Key key, this.name, this.picture, this.progress}) : super(key: key);
+  const PurchaseCard({Key key, this.name, this.picture, this.price, this.rating}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(8),
       child: InkWell(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_)=> PlantDetails()));
-        },
+        onTap: () {},
+
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
@@ -32,12 +31,10 @@ class PlantCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Stack(
               children: [
-                Image.network(
-                  picture,
+                Image.asset("assets/images/weed.jpg",
                   height: 220,
-                  width: 200,
-                  fit: BoxFit.cover,
-                ),
+                  width: 250,
+                  fit: BoxFit.cover,),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -50,46 +47,54 @@ class PlantCard extends StatelessWidget {
                   ),
                 ),
                 Align(
-                  alignment: Alignment.topLeft,
+                  alignment: Alignment.topRight,
                   child: Padding(
                     padding: const EdgeInsets.only(left: 8, top: 8),
                     child: LinearPercentIndicator(
                       width: 185,
+                      leading: Icon(Icons.mood_bad, color: Colors.white,),
                       animation: true,
                       lineHeight: 20,
                       animationDuration: 2000,
-                      percent: progress,
+                      percent: rating,
+                      trailing: Icon(Icons.mood, color: Colors.white,),
                       linearStrokeCap: LinearStrokeCap.roundAll,
-                      progressColor: Colors.lightGreenAccent.withOpacity(0.9),
+                      progressColor: Colors.amberAccent.withOpacity(0.9),
                     ),
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                    padding: const EdgeInsets.only(left: 8.0, bottom: 2),
                     child: RichText(text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '$name \n',
-                          style: TextStyle(
-                            fontSize: 18
+                        children: [
+                          TextSpan(
+                            text: '$name \n',
+                            style: TextStyle(
+                                fontSize: 18
+                            ),
                           ),
-                        ), /*
-                        TextSpan(text: '\$${price.toString()} made\n',
+                        TextSpan(text: '\$${price.toString()}\n',
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold
-                        )) */
+                        )),
+                          TextSpan(text: 'SOLD',
+                              style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold
+                              )),
                         ]
                     ),),
                   ),
-                )
+                ),
               ],
             ),
           ),
         ),
       ),
+
     );
   }
 }

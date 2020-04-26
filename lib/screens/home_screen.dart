@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:farming_app/models/plant.dart';
+import 'package:farming_app/models/user.dart';
 import 'package:farming_app/widgets/famousCard.dart';
-import 'package:farming_app/widgets/famousUsers.dart';
 import 'package:farming_app/widgets/searchBar.dart';
 import 'package:farming_app/widgets/welcomeBar.dart';
 import 'package:farming_app/widgets/yourPlants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +14,72 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  bool plantloaded = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+
+  }
+
+  List<Plant> userplants = [];
+
+  FirebaseUser user;
+
+  List<User> users;
+  bool usersloaded = false;
+
+
+  Future runSetup() async{
+    getAllPosts();
+    getAllFarmers();
+  }
+
+
+
+
+  Future getAllPosts() async{
+    await FirebaseAuth.instance.currentUser().then((value) {
+      setState(() {
+        user = value;
+        print("TASK COMPLETE");
+      });
+    });
+    Firestore.instance.collection('posts').getDocuments().then((snapshot){
+      for (DocumentSnapshot ds in snapshot.documents){
+        setState(() {
+          if(ds.data['uid']==user.uid)
+            userplants.add(Plant.fromMap(ds.data));
+        });
+      }
+      setState(() {
+        plantloaded = true;
+      });
+    });
+
+  }
+
+  Future getAllFarmers() async{
+    Firestore.instance.collection('users').getDocuments().then((snapshot){
+      for (DocumentSnapshot ds in snapshot.documents){
+        setState(() {
+          User u = User.fromMap(ds.data);
+          if(u.posts!=null){
+            users.add(u);
+          }
+
+        });
+      }
+      setState(() {
+        usersloaded = true;
+      });
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
             WelcomeBar(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text('Farm with Friends',
+              child: Text('Farm with Friends', maxLines: 1,
               style: TextStyle(
                 fontSize: 45, color: Colors.black.withOpacity(0.5),
                 fontWeight: FontWeight.bold,
@@ -49,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            YourPlants(),
+            plantloaded?YourPlants(plants: userplants,):Center(child: CircularProgressIndicator(),),
 
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,27 +145,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            FamousCard(
-              name: 'Donald Trump',
-              price: 2000.00,
-              picture: '',
-              onSale: true,
-            ),
-            FamousCard(
-              name: 'Your Mom',
-              price: 300.00,
-              picture: '',
-            ),
-            FamousCard(
-              name: 'My Dad',
-              price: 100.00,
-              picture: '',
-            ),
-            FamousCard(
-              name: 'Me',
-              price: 1.00,
-              picture: '',
-            ),
+            usersloaded?ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: users.length,
+              itemBuilder: (_, index) {
+                return  FamousCard(
+                  name: users[index].name,
+                  picture: users[index].image!=null?"":users[index].image,
+                  onSale: true,
+                );
+              },
+            ):
+            Center(child: CircularProgressIndicator(),),
           ],
         ),
       ),

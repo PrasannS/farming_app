@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,27 +15,91 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
+  List tasks = ['water the tomatos', 'plant the tpotatoes', 'water the weed', 'harvest the weed', 'water the tomatos', 'plant the tpotatoes', 'water the weed', 'harvest the weed'];
+  int pageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FlatButton(
-            child: Text('Get weather'),
-            onPressed: () {
-              getCurrentPosition();
-            },
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('To Do List', style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
+              ],
+            ),
           ),
-          RichText(
-            text: new TextSpan(
-                text: "Powered by ClimaCell",
-                style: new TextStyle(color: Colors.black),
-                recognizer: new TapGestureRecognizer()
-                  ..onTap = () {launch("https://www.climacell.co/");}
+          FaIcon(FontAwesomeIcons.cloudRain, size: 100.0,),
+          SizedBox(height: 30.0,),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 20.0,),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text('Today', style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: pageIndex == 0 ? FontWeight.bold
+                            : FontWeight.w400,
+                        // decoration: pageIndex == 1 ? TextDecoration.underline
+                        //     : TextDecoration.none
+                      ),),
+                      Text('Week', style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: pageIndex == 1 ? FontWeight.bold
+                            : FontWeight.w400,
+                        // decoration: pageIndex == 1 ? TextDecoration.underline
+                        //     : TextDecoration.none
+                      ),),
+                      Text('Month', style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: pageIndex == 2 ? FontWeight.bold
+                            : FontWeight.w400,
+                        // decoration: pageIndex == 1 ? TextDecoration.underline
+                        //     : TextDecoration.none
+                      ),
+                      ),
+                    ],
+                  ),
+
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: tasks.length,
+                        itemBuilder: (BuildContext context, int index){
+                          return Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              color: Colors.red,
+                              height: 50.0,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.radio_button_unchecked),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+
+                    ),
+                  ),
+
+                ],
+              ),
             ),
           )
-        ],
+        ]
       ),
     );
   }

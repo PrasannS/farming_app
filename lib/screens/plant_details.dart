@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class PlantDetails extends StatefulWidget {
   @override
@@ -10,17 +11,20 @@ class _PlantDetailsState extends State<PlantDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.withOpacity(0.9),
-      body: SafeArea(
-        child: (
-        Container(
-          color: Colors.white,
-          child: Column(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.white,
+            child: Column(
             children: [
               Stack(
                 children: [
-                  Image.asset("assets/images/weed.jpg",
-                  height: 350,
-                  fit: BoxFit.cover,),
+                  Container(
+                     child: Image.asset("assets/img/tomatoes.jpeg",
+                     fit: BoxFit.cover,),
+                  ),
                   Align(
                     alignment: Alignment.topCenter,
                     child: Container(
@@ -79,7 +83,7 @@ class _PlantDetailsState extends State<PlantDetails> {
                   ),
                   Align(alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: 350,
+                    height: 380,
                     decoration: BoxDecoration(
                       // Box decoration takes a gradient
                       gradient: LinearGradient(
@@ -94,6 +98,10 @@ class _PlantDetailsState extends State<PlantDetails> {
                           Colors.white.withOpacity(0.00001),
                         ],
                       ),
+                      border: Border(
+                        bottom: BorderSide(width: 2)
+                      ),
+
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8.0),
@@ -123,18 +131,86 @@ class _PlantDetailsState extends State<PlantDetails> {
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.8), fontSize: 26, fontWeight: FontWeight.w100
                             ),),
-                          )
+                          ),
+                          SizedBox(height: 15,)
                         ],
                       ),
                     ),
                   )
                 ],
               ),
+
+              Expanded(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                    ),
+                    Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                          )
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    SizedBox(
+                      height: 0,
+                    ),
+                    Container(
+                      child: CircularPercentIndicator(
+                        radius: 200,
+                        lineWidth: 20,
+                        animation: true,
+                        percent: 0.8,
+                        center: Icon(Icons.check_circle,
+                          color: Colors.green,
+                          size: 100,),
+                        circularStrokeCap: CircularStrokeCap.round,
+                        progressColor: Colors.green,
+                      ),
+                    ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Test'),
+                      ),
+                    ),
+                    SizedBox(width: 100,),
+                    Expanded(child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Text('Yo yo yo what is up my dudes I am back here again with another fresh shipment of your favorite snack. Get your fill here!)',
+                      ),),
+                    ),
+                    Padding(
+                      padding:
+                      const EdgeInsets.all(9),
+                      child: Material(
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white,
+                          elevation: 0.0,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            minWidth: MediaQuery.of(context).size.width,
+                            child: Text(
+                              "Harvest and Sell",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0),
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              )
             ],
+            ),
           ),
-        )
-        ),
+          ),
       ),
+
     );
   }
 }
