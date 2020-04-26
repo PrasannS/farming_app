@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farming_app/models/plant.dart';
-import 'package:farming_app/models/user.dart';
 import 'package:farming_app/screens/add_plant_screen.dart';
 import 'package:farming_app/widgets/famousCard.dart';
 import 'package:farming_app/widgets/searchBar.dart';
