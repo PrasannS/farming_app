@@ -16,19 +16,27 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   double totalCost = 0;
 
   Future<QuerySnapshot> loadDatabase() async {
+    quantity = new List<String>();
+    print("LOAD");
     await Firestore.instance.collection('users').document(userid).get().then((value) {
+      print("TEST1");
       inCart = value.data['cart'];
       for(int i=1;i<value.data['cart'].length;i+=2){
         quantity.add(value.data['cart'][i].toString());
       }
     });
     for(int i=0;i<inCart.length;i+=2){
+      print("TEST2");
       await Firestore.instance.collection('posts').document(inCart[i]).get().then((value) {
         for(int e=1;e<inCart.length;e+=2){
           totalCost+=value.data['price']*value.data['units'];
         }
       });
     }
+    QuerySnapshot query = await Firestore.instance.collection('posts').getDocuments();
+
+    print("QUERY" + query.toString());
+
     return Firestore.instance.collection('posts').getDocuments();
   }
 
@@ -72,13 +80,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       builder: (context, snapshot) {
                         if(snapshot.connectionState!=ConnectionState.done){
                           if(snapshot.hasError){
-                            print('has error');
+                            print(snapshot.error);
                           }
                           return Scaffold(
                             body: CircularProgressIndicator(),
                           );
                         }
-                        else{
+                        else {
                           int cartLength;
                           if(inCart==null){
                             cartLength = 0;
@@ -97,7 +105,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             child: ListView.builder(
                                 itemCount: cartLength,
                                 itemBuilder: (BuildContext context, int i){
-                                  cost = cart[i]['price']*quantity[i];
+                                  cost = cart[i]['price']*int.parse(quantity[i]);
                                   if(snapshot.connectionState!=ConnectionState.done){
                                     print('loading');
                                     return Container(

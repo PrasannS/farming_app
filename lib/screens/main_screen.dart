@@ -16,7 +16,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedTab = 0;
   var _pageOptions = [
-    CheckoutScreen(),
+    HomeScreen(),
     MarketplaceScreen(),
     TodoScreen(),
     ProfileScreen()

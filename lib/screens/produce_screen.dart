@@ -15,7 +15,7 @@ class _ProduceScreenState extends State<ProduceScreen> {
   int amount = 1;
   String desc;
   String name;
-  String price;
+  double price;
   String url;
   String address;
   String type;
