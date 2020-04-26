@@ -16,68 +16,59 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  bool plantloaded = false;
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     runSetup();
   }
 
-  List<Plant> userplants = [];
+  List<DocumentSnapshot> userplants;
 
   FirebaseUser user;
 
   List<User> users = [];
   bool usersloaded = false;
 
-
-  Future runSetup() async{
+  Future runSetup() async {
     getAllPosts();
     getAllFarmers();
   }
 
-
-
-
-  Future getAllPosts() async{
+  Future getAllPosts() async {
     await FirebaseAuth.instance.currentUser().then((value) {
       setState(() {
         user = value;
         print("TASK COMPLETE");
       });
     });
-    Firestore.instance.collection('posts').getDocuments().then((snapshot){
-      for (DocumentSnapshot ds in snapshot.documents){
-        setState(() {
-          if(ds.data['uid']==user.uid)
-            userplants.add(Plant.fromMap(ds.data));
-        });
+    Firestore.instance.collection('posts').getDocuments().then((snapshot) {
+      List<DocumentSnapshot> setDocs = new List<DocumentSnapshot>();
+      for (int i = 0; i < snapshot.documents.length; i++) {
+        if (snapshot.documents[i].data['uid'] == user.uid) {
+          setDocs.add(snapshot.documents[i]);
+        }
       }
       setState(() {
-        plantloaded = true;
+        userplants = new List();
+        userplants = setDocs;
       });
     });
-
   }
 
-  Future getAllFarmers() async{
-    Firestore.instance.collection('users').getDocuments().then((snapshot){
-      for (DocumentSnapshot ds in snapshot.documents){
+  Future getAllFarmers() async {
+    Firestore.instance.collection('users').getDocuments().then((snapshot) {
+      for (DocumentSnapshot ds in snapshot.documents) {
         setState(() {
           print(ds.data);
           User u = User.fromMap(ds.data);
           users.add(u);
-
         });
       }
       setState(() {
         usersloaded = true;
       });
     });
-
   }
 
   @override
@@ -85,7 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AddPlantScreen())),
+        onPressed: () => Navigator.push(
+            context, MaterialPageRoute(builder: (_) => AddPlantScreen())),
       ),
       body: SafeArea(
         child: ListView(
@@ -93,11 +85,15 @@ class _HomeScreenState extends State<HomeScreen> {
             WelcomeBar(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text('Farm with Friends', maxLines: 1,
-              style: TextStyle(
-                fontSize: 45, color: Colors.black.withOpacity(0.5),
-                fontWeight: FontWeight.bold,
-              ),),
+              child: Text(
+                'Farm with Friends',
+                maxLines: 1,
+                style: TextStyle(
+                  fontSize: 45,
+                  color: Colors.black.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             SearchBar(),
             Row(
@@ -106,24 +102,31 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
-                    child: Text('Your Plants',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400
-                    ),),
+                    child: Text(
+                      'Your Plants',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
-                    child: Icon(Icons.navigate_next,
-                    color: Colors.blueGrey,),
+                    child: Icon(
+                      Icons.navigate_next,
+                      color: Colors.blueGrey,
+                    ),
                   ),
                 )
               ],
             ),
-            plantloaded?YourPlants(plants: userplants,):Center(child: CircularProgressIndicator(),),
-
+            userplants == null
+                ? Center(
+              child: CircularProgressIndicator(),
+            )
+                : YourPlants(
+              plants: userplants,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -143,31 +146,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
-                    child: Icon(Icons.navigate_next,
-                      color: Colors.blueGrey,),
+                    child: Icon(
+                      Icons.navigate_next,
+                      color: Colors.blueGrey,
+                    ),
                   ),
                 ),
               ],
             ),
-            usersloaded?
-               Container(
-                height: 110*users.length*1.0,
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemCount: users.length,
-                    itemBuilder: (_, index) {
-                      print("HELLOOOOOO");
-                      print(users.length);
-                      return  FamousCard(
-                        name: users[index].name,
-                        picture: users[index].image,
-                        onSale: true,
-                      );
-                    },
+            usersloaded
+                ? Container(
+                    height: 110 * users.length * 1.0,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: users.length,
+                      itemBuilder: (_, index) {
+                        print("HELLOOOOOO");
+                        print(users.length);
+                        return FamousCard(
+                          name: users[index].name,
+                          picture: users[index].image,
+                          onSale: true,
+                        );
+                      },
+                    ),
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
                   ),
-              ):
-            Center(child: CircularProgressIndicator(),),
           ],
         ),
       ),

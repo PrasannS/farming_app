@@ -13,6 +13,7 @@ class PlantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(name);
     return Padding(
       padding: EdgeInsets.all(4),
       child: InkWell(

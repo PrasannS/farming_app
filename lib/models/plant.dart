@@ -4,7 +4,7 @@ class Plant {
   int id;
   String uid;
   int progress;
-  int price;
+  double price;
   String name;
   String image;
 

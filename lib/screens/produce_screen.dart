@@ -132,14 +132,14 @@ class _ProduceScreenState extends State<ProduceScreen> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  Text(
-                    produceSeller.data['address'],
-                    style:
-                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
+//                  Text(
+//                    produceSeller.data['address'],
+//                    style:
+//                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),
+//                  ),
+//                  SizedBox(
+//                    height: 10.0,
+//                  ),
                   Text(
                     post.data['desc'],
                     style:
