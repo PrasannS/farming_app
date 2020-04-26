@@ -54,11 +54,11 @@ class _ProduceMarketState extends State<ProduceMarket> {
                             children: [
                               Text(names[index], style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
                               SizedBox(height: 10.0,),
-                              Text('Sunflower seeds that will grow into sunflowers', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
+                              Text('Home grown fresh tomatoes', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
                               SizedBox(height: 15.0,),
-                              Text('\$20/gram', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                              Text('\$20/tomato', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                               SizedBox(height: 15.0,),
-                              Text('10 - 20 days to grow', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),)
+                              Text('Lucas Cai', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),)
                             ],
                           ),
                         )
