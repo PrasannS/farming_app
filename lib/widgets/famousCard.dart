@@ -5,8 +5,9 @@ class FamousCard extends StatelessWidget {
   final String picture;
   final double price;
   final bool onSale;
+  final int cropsPlanted;
 
-  const FamousCard({Key key, this.name, this.picture, this.price, this.onSale})
+  const FamousCard({Key key, this.name, this.picture, this.price, this.onSale, this.cropsPlanted})
       : super(key: key);
 
   @override
@@ -45,7 +46,7 @@ class FamousCard extends StatelessWidget {
                 fontSize: 5
               )),
               TextSpan(
-                text: '\$${price.toString()} made\t',
+                text: '\$${cropsPlanted.toString()} different planted\t',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,
                 color: Colors.green),
               ),

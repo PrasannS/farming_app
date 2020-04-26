@@ -138,19 +138,22 @@ class _TodoScreenState extends State<TodoScreen> {
         SizedBox(
           height: 30.0,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            new RichText(
-              textAlign: TextAlign.right,
-              text: new TextSpan(
-                  text: 'Powered by ClimaCell',
-                  style: new TextStyle(color: Colors.black,),
-                  recognizer: new TapGestureRecognizer()
-                    ..onTap = () { launch('https://www.climacell.co/');
-                    }
-              ),),
-          ],
+        Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              new RichText(
+                textAlign: TextAlign.right,
+                text: new TextSpan(
+                    text: 'Powered by ClimaCell',
+                    style: new TextStyle(color: Colors.black,),
+                    recognizer: new TapGestureRecognizer()
+                      ..onTap = () { launch('https://www.climacell.co/');
+                      }
+                ),),
+            ],
+          ),
         ),
         Expanded(
           child: Container(

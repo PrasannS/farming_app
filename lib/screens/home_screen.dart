@@ -8,6 +8,7 @@ import 'package:farming_app/widgets/welcomeBar.dart';
 import 'package:farming_app/widgets/yourPlants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   FirebaseUser user;
 
-  List<User> users = [];
+  List<DocumentSnapshot> users = [];
   bool usersloaded = false;
 
   Future runSetup() async {
@@ -59,12 +60,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Future getAllFarmers() async {
     Firestore.instance.collection('users').getDocuments().then((snapshot) {
       for (DocumentSnapshot ds in snapshot.documents) {
-        setState(() {
-          print(ds.data);
-          User u = User.fromMap(ds.data);
-          users.add(u);
-        });
+          users.add(ds);
       }
+      users.sort((userA, userB) {
+        int userAPlanted = 0;
+        int userBPlanted = 0;
+        if (userA.data['posts'] != null) {
+          userAPlanted = userA.data['posts'].length;
+        }
+        if (userB.data['posts'] != null) {
+          userBPlanted = userB.data['posts'].length;
+        }
+        return (userAPlanted - userBPlanted);
+      });
       setState(() {
         usersloaded = true;
       });
@@ -164,9 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (_, index) {
                         print("HELLOOOOOO");
                         print(users.length);
+                        int numPlanted = 0;
+                        if (users[index].data['posts'] != null) {
+                          numPlanted = users[index].data['posts'].length;
+                        }
                         return FamousCard(
-                          name: users[index].name,
-                          picture: users[index].image,
+                          name: users[index].data['name'],
+                          cropsPlanted: numPlanted,
                           onSale: true,
                         );
                       },
