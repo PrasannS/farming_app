@@ -60,7 +60,7 @@ class _ListingsPageState extends State<ListingsPage> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset('assets/images/weed.jpg',
+              child: Image.asset('assets/images/oranges.jpg',
                 fit: BoxFit.cover,),
             ),
           ),
@@ -87,7 +87,7 @@ class _ListingsPageState extends State<ListingsPage> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
-              child: Image.asset('assets/images/donald.jpg',
+              child: Image.asset('assets/images/Kiwi.jpg',
                 fit: BoxFit.cover,),
             ),
           ),

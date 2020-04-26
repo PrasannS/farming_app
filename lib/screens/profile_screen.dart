@@ -48,8 +48,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 SizedBox(height: 0,),
+                Container(
+                  child: Text(
+                  "Overall Rating Score",
+                  style: new TextStyle(fontSize: 16.0),
+                ),
+                ),
                 Padding(
-                  padding: EdgeInsets.all(5.0),
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
                   child: Container(
                       child: new LinearPercentIndicator(
                         alignment: MainAxisAlignment.center,
@@ -61,10 +67,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(Icons.mood_bad),
                         ),
-                        center: Text(
-                          "Overall Rating Score",
-                          style: new TextStyle(fontSize: 16.0),
-                      ),
                         trailing: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Icon(Icons.mood),
@@ -75,7 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 0,),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
