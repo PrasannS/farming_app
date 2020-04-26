@@ -70,7 +70,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
       'type': _captionController.text.toString(),
       'price': double.parse(_priceController.text.toString()),
       'units': int.parse(_numSeedsController.text.toString()),
-
+      'url': 'placeholder',
     });
     Navigator.pop(context);
 
