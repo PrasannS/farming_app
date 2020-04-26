@@ -1,7 +1,5 @@
 import 'package:farming_app/api_client/api_client.dart';
 import 'package:farming_app/models/shop_result.dart';
-import 'package:farming_app/screens/produce_screen.dart';
-import 'package:farming_app/widgets/searchBar.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
