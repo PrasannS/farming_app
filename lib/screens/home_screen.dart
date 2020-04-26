@@ -22,14 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
 
-
+    runSetup();
   }
 
   List<Plant> userplants = [];
 
   FirebaseUser user;
 
-  List<User> users;
+  List<User> users = [];
   bool usersloaded = false;
 
 
@@ -66,10 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
     Firestore.instance.collection('users').getDocuments().then((snapshot){
       for (DocumentSnapshot ds in snapshot.documents){
         setState(() {
+          print(ds.data);
           User u = User.fromMap(ds.data);
-          if(u.posts!=null){
-            users.add(u);
-          }
+          users.add(u);
 
         });
       }
@@ -145,16 +144,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            usersloaded?ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: users.length,
-              itemBuilder: (_, index) {
-                return  FamousCard(
-                  name: users[index].name,
-                  picture: users[index].image!=null?"":users[index].image,
-                  onSale: true,
-                );
-              },
+            usersloaded?Flexible(
+              child: Container(
+                width: 200*users.length*1.0,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: users.length,
+                    itemBuilder: (_, index) {
+                      print("HELLOOOOOO");
+                      print(users.length);
+                      return  FamousCard(
+                        name: users[index].name,
+                        picture: users[index].image,
+                        onSale: true,
+                      );
+                    },
+                  ),
+              ),
             ):
             Center(child: CircularProgressIndicator(),),
           ],

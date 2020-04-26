@@ -4,23 +4,22 @@ class User {
   int id;
   String uid;
   String image;
-  List<String> posts;
+  //List<String> posts;
   String name;
 
-  User({this.id, this.uid, this.posts, this.name, this.image});
+  User({this.id, this.uid,  this.name, this.image});
 
   Map<String, dynamic> toMap() =>{
     "id": id,
     "uid": uid,
     "image": image,
-    "posts":posts,
 
     "name":name,
   };
 
   factory User.fromMap(Map<String, dynamic> json) => new User(
       id: json["id"],
-      posts:json["posts"].cast<String>(),
+      //posts:json["posts"].cast<String>(),
       uid:json["uid"],
       image:json["image"],
       name: json["name"],
@@ -28,7 +27,7 @@ class User {
 
   @override
   String toString() {
-    return 'Prayer{id: $id, uid: $uid, image: $image, posts $posts, name $name}';
+    return 'User{id: $id, uid: $uid, image: $image, name $name}';
   }
 
 }
