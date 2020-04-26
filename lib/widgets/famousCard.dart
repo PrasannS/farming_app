@@ -46,7 +46,7 @@ class FamousCard extends StatelessWidget {
                 fontSize: 5
               )),
               TextSpan(
-                text: '\$${cropsPlanted.toString()} different planted\t',
+                text: '${cropsPlanted.toString()} different planted\t',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,
                 color: Colors.green),
               ),
