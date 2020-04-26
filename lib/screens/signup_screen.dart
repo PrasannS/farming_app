@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
 
+String userid;
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -174,7 +175,6 @@ class _SignupScreenState extends State<SignupScreen> {
                           SizedBox(height: 50.0),
                           GestureDetector(
                               onTap: () {
-                                String userid;
                                   print("pass");
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
                                           (currentUser) async {
@@ -183,14 +183,16 @@ class _SignupScreenState extends State<SignupScreen> {
                                           "email":emailInputController.text,
                                           "uid":currentUser.user.uid,
                                           "posts": [],
-                                          "shoppingCart": {''}
+                                          "shoppingCart": {{}}
                                         });
                                         userid = currentUser.user.uid;
                                       });
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => MainPage()),
-                                );
+                                if(userid!=null){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => MainPage()),
+                                  );
+                                }
                               },
                               child: Container(
                                 height: 50.0,
