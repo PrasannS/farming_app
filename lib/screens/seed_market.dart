@@ -3,6 +3,7 @@ import 'package:farming_app/models/shop_result.dart';
 import 'package:farming_app/screens/produce_screen.dart';
 import 'package:farming_app/widgets/searchBar.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SeedMarket extends StatefulWidget {
   @override
@@ -69,6 +70,16 @@ class _SeedMarketState extends State<SeedMarket> {
     });
   }
 
+  _launchURL(String url) async {
+    //const url = 'https://flutter.dev';
+    url = url.replaceAll(" ", "");
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   final myController = TextEditingController();
 
   @override
@@ -91,13 +102,16 @@ class _SeedMarketState extends State<SeedMarket> {
           ),
         ),
         Container(
-          height: shops.length*500.0,
+          height: shops.length*210.0,
           child: shoploaded?ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemCount: shops.length,
             itemBuilder: (BuildContext context, int index){
               return GestureDetector(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProduceScreen())),
+                onTap:(){
+                  _launchURL(shops[index].url);
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
