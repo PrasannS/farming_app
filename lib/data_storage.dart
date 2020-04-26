@@ -80,11 +80,9 @@ class Database{
                                   ),
                                   FlatButton(
                                     onPressed: () {
-                                      currentPostID = docs[i].documentID;
-                                      print('Post ID: '+currentPostID);
                                       Navigator.push(
                                         context,
-                                        MaterialPageRoute(builder: (context) => ProduceScreen()),
+                                        MaterialPageRoute(builder: (context) => ProduceScreen(postId: docs[i].documentID,)),
                                       );
                                     },
                                     child: Container(
