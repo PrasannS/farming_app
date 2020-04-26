@@ -147,7 +147,7 @@ class _TodoScreenState extends State<TodoScreen> {
                 textAlign: TextAlign.right,
                 text: new TextSpan(
                     text: 'Powered by ClimaCell',
-                    style: new TextStyle(color: Colors.black,),
+                    style: new TextStyle(color: Colors.black, fontSize: 16.0),
                     recognizer: new TapGestureRecognizer()
                       ..onTap = () { launch('https://www.climacell.co/');
                       }
