@@ -29,8 +29,28 @@ class _TodoScreenState extends State<TodoScreen> {
   List<List<double>> ranges = [];
   bool fullyloaded = false;
 
+  @override
+  void initState() {
+    super.initState();
 
-  //TODO execute this once you get produce_names and toPlant arrays
+    getData();
+  }
+
+  //TODO fills in the produce_names and the toPlant arrays using firebase data
+  Future getProduceData()async{
+
+  }
+
+  Future getData() async{
+    await getProduceData();
+    await getRanges();
+    setState(() {
+      fullyloaded = true;
+    });
+  }
+
+
+  //TODO set up so that the expected rainfall in inches is subtracted.
   Future getRanges () async{
     for (int i = 0; i<toPlant.length; i++){
       await fetchWaterResult(produce_names[i]).then((value){
@@ -148,7 +168,8 @@ class _TodoScreenState extends State<TodoScreen> {
                                   IconButton(
                                     icon: Icon(Icons.radio_button_unchecked),
                                     onPressed: (){
-                                      //TODO What happens when a taks is completed?
+                                      //TODO What happens when a task is completed?
+                                      
                                     },
                                   ),
                                   GestureDetector(
@@ -158,7 +179,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                         MaterialPageRoute(builder: (context) => VideosPage(item: produce_names[index],)),
                                       );
                                     }:null,
-                                      child: Text(dayTasks[index], style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),)),
+                                      child: Text(toPlant[index]?"Plant "+produce_names[index]:"Water "+produce_names[index]+" "+ranges[index].toString()+" inches", style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),)),
                                 ],
                               ),
                             ),
@@ -176,6 +197,8 @@ class _TodoScreenState extends State<TodoScreen> {
     );
   }
 
+
+  //TODO set up to get inches of rainfall predicted for the rest of the week
   getCurrentPosition() async {
     PermissionStatus status = await Permission.locationWhenInUse.status;
     print(status);
