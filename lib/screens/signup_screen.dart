@@ -177,22 +177,21 @@ class _SignupScreenState extends State<SignupScreen> {
                               onTap: () {
                                   print("pass");
                                   FirebaseAuth.instance.createUserWithEmailAndPassword(email: emailInputController.text, password: passwordInputController.text).then(
-                                          (currentUser) async {
+                                          (currentUser) {
                                         Firestore.instance.collection('users').document(currentUser.user.uid).setData({
                                           "name":nameInputController.text,
                                           "email":emailInputController.text,
                                           "uid":currentUser.user.uid,
                                           "posts": [],
-                                          "shoppingCart": {{}}
+                                          "cartItems": [],
+                                          "cartQuantity": [],
                                         });
                                         userid = currentUser.user.uid;
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => MainPage()),
+                                        );
                                       });
-                                if(userid!=null){
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => MainPage()),
-                                  );
-                                }
                               },
                               child: Container(
                                 height: 50.0,
