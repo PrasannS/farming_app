@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:farming_app/api_client/api_client.dart';
+import 'package:farming_app/screens/videos_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:farming_app/models/Weather.dart';
 
@@ -19,6 +20,26 @@ class _TodoScreenState extends State<TodoScreen> {
   List weekTasks = ['weektask1', 'weektask12', 'weektask3', 'weektask4', 'weektask5'];
   List monthTasks = ['monthTask1', 'monthTask2', 'monthTask3', 'monthTask4', 'monthTask5'];
   int pageIndex = 0;
+
+  //TODO list of booleans to fil up, and string names of the produce. If smth is toPlant then it will take to YT Page
+  List<bool> toPlant = [];
+  List<String> produce_names = [];
+
+  //ranges of how much water to give.
+  List<List<double>> ranges = [];
+  bool fullyloaded = false;
+
+
+  //TODO execute this once you get produce_names and toPlant arrays
+  Future getRanges () async{
+    for (int i = 0; i<toPlant.length; i++){
+      await fetchWaterResult(produce_names[i]).then((value){
+        setState(() {
+          ranges.add(value);
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,9 +120,9 @@ class _TodoScreenState extends State<TodoScreen> {
                   SizedBox(height: 10.0,),
                   Divider(thickness: 3.0,),
 
-                  Expanded(
-                    child: pageIndex == 0 ? ListView.builder(
-                      itemCount: dayTasks.length,
+                  fullyloaded?Expanded(
+                    child: ListView.builder(
+                      itemCount: toPlant.length,
                         itemBuilder: (BuildContext context, int index){
                           return Padding(
                             padding: const EdgeInsets.all(10.0),
@@ -126,84 +147,25 @@ class _TodoScreenState extends State<TodoScreen> {
                                 children: [
                                   IconButton(
                                     icon: Icon(Icons.radio_button_unchecked),
+                                    onPressed: (){
+                                      //TODO What happens when a taks is completed?
+                                    },
                                   ),
-                                  Text(dayTasks[index], style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
+                                  GestureDetector(
+                                    onTap: toPlant[index]?(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => VideosPage(item: produce_names[index],)),
+                                      );
+                                    }:null,
+                                      child: Text(dayTasks[index], style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),)),
                                 ],
                               ),
                             ),
                           );
                         }
                     )
-                        :
-                    pageIndex == 1 ? ListView.builder(
-                        itemCount: weekTasks.length,
-                        itemBuilder: (BuildContext context, int index){
-                          return Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.8),
-                                      blurRadius: 3.0, // has the effect of softening the shadow
-                                      spreadRadius: 1.0, // has the effect of extending the shadow
-                                      offset: Offset(
-                                        4.0, // horizontal, move right 10
-                                        4.0, // vertical, move down 10
-                                      ),
-                                    ),]
-                              ),
-                              height: 50.0,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.radio_button_unchecked),
-                                  ),
-                                  Text(weekTasks[index], style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
-                                ],
-                              ),
-                            ),
-                          );
-                        }
-                    ) :
-                    ListView.builder(
-                        itemCount: monthTasks.length,
-                        itemBuilder: (BuildContext context, int index){
-                          return Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.8),
-                                      blurRadius: 3.0, // has the effect of softening the shadow
-                                      spreadRadius: 1.0, // has the effect of extending the shadow
-                                      offset: Offset(
-                                        4.0, // horizontal, move right 10
-                                        4.0, // vertical, move down 10
-                                      ),
-                                    ),]
-                              ),
-                              height: 50.0,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.radio_button_unchecked),
-                                  ),
-                                  Text(monthTasks[index], style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),),
-                                ],
-                              ),
-                            ),
-                          );
-                        }
-                    )
-                  ),
+                  ):Center(child:CircularProgressIndicator()),
 
                 ],
               ),
