@@ -25,14 +25,14 @@ class Plant {
       id: json["id"],
       price:json["price"],
       uid:json["uid"],
-      progress:json["progress"]
-      ,name: json["name"],
+      progress:json["progress"],
+      name: json["name"],
       image: json["image"]
   );
 
   @override
   String toString() {
-    return 'Prayer{id: $id, uid: $uid, progress: $progress, price $price, name $name}';
+    return 'Plant{id: $id, uid: $uid, progress: $progress, price $price, name $name}';
   }
 
 }
