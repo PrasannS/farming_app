@@ -1,0 +1,81 @@
+,column,data,model,params,test,validation
+0,Rm,1.0,rf,"{'criterion': 0, 'max_depth': 13, 'max_features': 8, 'n_estimators': 23}",73.2523235865123,74.57214243913165
+1,A5,1.0,rf,"{'criterion': 1, 'max_depth': 4, 'max_features': 6, 'n_estimators': 37}",4.3567275525417966,5.155619186675073
+2,Diffusible Hydrogen,1.0,rf,"{'criterion': 1, 'max_depth': 6, 'max_features': 7, 'n_estimators': 9}",0.8786058199526661,1.1393737325230717
+3,Moisture,1.0,rf,"{'criterion': 1, 'max_depth': 6, 'max_features': 6, 'n_estimators': 1}",0.024085207106279292,0.029253942835642508
+4,Yield strength,1.0,rf,"{'criterion': 1, 'max_depth': 12, 'max_features': 8, 'n_estimators': 36}",95.57472511511067,112.54357687744935
+5,Tensile,1.0,rf,"{'criterion': 0, 'max_depth': 18, 'max_features': 7, 'n_estimators': 23}",115.652258069767,124.56236296454732
+6,Ferrite (Fn),1.0,rf,"{'criterion': 1, 'max_depth': 3, 'max_features': 8, 'n_estimators': 13}",3.1648889153550406,4.209891446800092
+7,Elongation,1.0,rf,"{'criterion': 0, 'max_depth': 18, 'max_features': 1, 'n_estimators': 1}",4.814120493955023,5.716290063213968
+8,Charpy,1.0,rf,"{'criterion': 0, 'max_depth': 17, 'max_features': 8, 'n_estimators': 9}",20.85006828518571,16.069111056378812
+9,DIN_W,1.0,rf,"{'criterion': 1, 'max_depth': 16, 'max_features': 8, 'n_estimators': 19}",0.26892466207323396,0.23207712031241096
+10,HT_Temp,1.0,rf,"{'criterion': 1, 'max_depth': 9, 'max_features': 7, 'n_estimators': 20}",63.35091462511321,23.917485352361847
+11,IE-20,1.0,rf,"{'criterion': 1, 'max_depth': 12, 'max_features': 3, 'n_estimators': 24}",21.150767217684226,24.618307644384487
+12,IE-40,1.0,rf,"{'criterion': 1, 'max_depth': 10, 'max_features': 5, 'n_estimators': 34}",30.08556979432611,8.326596576344151
+13,IE-60,1.0,rf,"{'criterion': 1, 'max_depth': 13, 'max_features': 0, 'n_estimators': 12}",14.694729525780247,17.368909384227276
+14,Redry_Time,1.0,rf,"{'criterion': 0, 'max_depth': 9, 'max_features': 7, 'n_estimators': 39}",0.1797961670383367,0.1927070426552872
+15,Rp0,1.0,rf,"{'criterion': 1, 'max_depth': 7, 'max_features': 6, 'n_estimators': 36}",576.5037473872353,3344.4708481042585
+16,Rm,1.0,knn,{'n_neighbors': 3},129.65326766164017,112.94935091498817
+17,A5,1.0,knn,{'n_neighbors': 17},5.1384209280515725,5.905659235584778
+18,Diffusible Hydrogen,1.0,knn,{'n_neighbors': 28},1.1198008592764508,1.408319507146232
+19,Moisture,1.0,knn,{'n_neighbors': 67},0.0500537526980717,0.055420777445418436
+20,Yield strength,1.0,knn,{'n_neighbors': 39},121.6239123510475,137.5207972166491
+21,Tensile,1.0,knn,{'n_neighbors': 50},155.76685134492058,184.2666899699031
+22,Ferrite (Fn),1.0,knn,{'n_neighbors': 22},2.9415773706283885,3.98634757249559
+23,Elongation,1.0,knn,{'n_neighbors': 41},6.227143386909581,8.059613762196014
+24,Charpy,1.0,knn,{'n_neighbors': 55},21.18447973683433,18.739649518824166
+25,DIN_W,1.0,knn,{'n_neighbors': 69},0.2741305478803069,0.33622296280039876
+26,HT_Temp,1.0,knn,{'n_neighbors': 86},63.49093017595056,29.17008351051104
+27,IE-20,1.0,knn,{'n_neighbors': 22},22.512743426796977,28.05446083445256
+28,IE-40,1.0,knn,{'n_neighbors': 41},22.031626596217535,15.541017699567178
+29,IE-60,1.0,knn,{'n_neighbors': 54},23.485472154697597,21.744098565409427
+30,Redry_Time,1.0,knn,{'n_neighbors': 80},0.331892227131381,0.3692343414555341
+31,Rp0,1.0,knn,{'n_neighbors': 69},351.71940876021,3358.0913029946078
+32,Rm,1.0,xgb,"{'colsample_bytree': 1, 'learning_rate': 5, 'max_depth': 1, 'min_child_weight': 0, 'subsample': 0.9115632539178486}",73.30987388061989,69.15364017390208
+33,A5,1.0,xgb,"{'colsample_bytree': 1, 'learning_rate': 0, 'max_depth': 5, 'min_child_weight': 6, 'subsample': 0.8987445124111278}",3.4955995221030887,3.5235737319003593
+34,Diffusible Hydrogen,1.0,xgb,"{'colsample_bytree': 1, 'learning_rate': 1, 'max_depth': 1, 'min_child_weight': 3, 'subsample': 0.8304673180926019}",0.6546652326552991,0.8035023054384816
+35,Moisture,1.0,xgb,"{'colsample_bytree': 3, 'learning_rate': 4, 'max_depth': 7, 'min_child_weight': 3, 'subsample': 0.9541772403162256}",0.013764796612591307,0.01995684684196578
+36,Yield strength,1.0,xgb,"{'colsample_bytree': 4, 'learning_rate': 5, 'max_depth': 9, 'min_child_weight': 5, 'subsample': 0.9632793840513446}",92.14045997237449,98.6694994359914
+37,Tensile,1.0,xgb,"{'colsample_bytree': 4, 'learning_rate': 4, 'max_depth': 4, 'min_child_weight': 0, 'subsample': 0.8497479128296657}",110.1160582318623,122.01841205975335
+38,Ferrite (Fn),1.0,xgb,"{'colsample_bytree': 2, 'learning_rate': 4, 'max_depth': 5, 'min_child_weight': 6, 'subsample': 0.9681413231020166}",1.095350963015506,1.2685907440677662
+39,Elongation,1.0,xgb,"{'colsample_bytree': 2, 'learning_rate': 1, 'max_depth': 3, 'min_child_weight': 4, 'subsample': 0.8785966342644369}",4.8977563731024905,5.675184072364086
+40,Charpy,1.0,xgb,"{'colsample_bytree': 3, 'learning_rate': 0, 'max_depth': 6, 'min_child_weight': 4, 'subsample': 0.9444468586028631}",20.052726007608758,15.80735266537896
+41,DIN_W,1.0,xgb,"{'colsample_bytree': 3, 'learning_rate': 2, 'max_depth': 8, 'min_child_weight': 4, 'subsample': 0.9185223531904572}",0.25522301016204174,0.22073076965823282
+42,HT_Temp,1.0,xgb,"{'colsample_bytree': 3, 'learning_rate': 5, 'max_depth': 3, 'min_child_weight': 2, 'subsample': 0.842375842722261}",63.62287384559068,22.135847461484627
+43,IE-20,1.0,xgb,"{'colsample_bytree': 0, 'learning_rate': 3, 'max_depth': 6, 'min_child_weight': 3, 'subsample': 0.9501608110987076}",31.69497966752669,22.873371776472638
+44,IE-40,1.0,xgb,"{'colsample_bytree': 2, 'learning_rate': 0, 'max_depth': 4, 'min_child_weight': 6, 'subsample': 0.9316270787218258}",20.78894134062594,13.262981921886269
+45,IE-60,1.0,xgb,"{'colsample_bytree': 2, 'learning_rate': 4, 'max_depth': 3, 'min_child_weight': 1, 'subsample': 0.8289741317685538}",20.050367440974483,16.555716725534587
+46,Redry_Time,1.0,xgb,"{'colsample_bytree': 2, 'learning_rate': 5, 'max_depth': 5, 'min_child_weight': 1, 'subsample': 0.8443293044018807}",0.18288129834004177,0.20670615851393426
+47,Rp0,1.0,xgb,"{'colsample_bytree': 0, 'learning_rate': 5, 'max_depth': 5, 'min_child_weight': 0, 'subsample': 0.9283173521530753}",636.20963109342,3577.1211623924723
+48,Rm,1.0,lgb,"{'colsample_bytree': 4, 'learning_rate': 4, 'max_depth': 6, 'min_child_weight': 0, 'subsample': 0.9699673040334252}",68.19438745139544,72.94010734152371
+49,A5,1.0,lgb,"{'colsample_bytree': 2, 'learning_rate': 2, 'max_depth': 2, 'min_child_weight': 3, 'subsample': 0.8636688127993115}",3.1084085581215346,3.5322446480027163
+50,Diffusible Hydrogen,1.0,lgb,"{'colsample_bytree': 4, 'learning_rate': 2, 'max_depth': 10, 'min_child_weight': 0, 'subsample': 0.9486674361451511}",0.6081858519734513,0.8098988318341076
+51,Moisture,1.0,lgb,"{'colsample_bytree': 3, 'learning_rate': 1, 'max_depth': 4, 'min_child_weight': 6, 'subsample': 0.8501984124938864}",0.01533188811372337,0.023031974872425896
+52,Yield strength,1.0,lgb,"{'colsample_bytree': 0, 'learning_rate': 5, 'max_depth': 3, 'min_child_weight': 3, 'subsample': 0.937657519518143}",89.61810509697557,100.6562927767462
+53,Tensile,1.0,lgb,"{'colsample_bytree': 0, 'learning_rate': 1, 'max_depth': 10, 'min_child_weight': 2, 'subsample': 0.9544685678847895}",118.01378442124931,128.70042242094772
+54,Ferrite (Fn),1.0,lgb,"{'colsample_bytree': 0, 'learning_rate': 4, 'max_depth': 8, 'min_child_weight': 6, 'subsample': 0.8664972888706501}",1.234960849682729,1.5207777103701035
+55,Elongation,1.0,lgb,"{'colsample_bytree': 2, 'learning_rate': 4, 'max_depth': 0, 'min_child_weight': 0, 'subsample': 0.8839287041506699}",5.1021177013084404,6.119648627743077
+56,Charpy,1.0,lgb,"{'colsample_bytree': 2, 'learning_rate': 2, 'max_depth': 6, 'min_child_weight': 4, 'subsample': 0.9990102594466947}",20.36819483799329,15.646203030736123
+57,DIN_W,1.0,lgb,"{'colsample_bytree': 1, 'learning_rate': 5, 'max_depth': 1, 'min_child_weight': 4, 'subsample': 0.9867377862253938}",0.2583814577911708,0.2096908426626937
+58,HT_Temp,1.0,lgb,"{'colsample_bytree': 1, 'learning_rate': 3, 'max_depth': 7, 'min_child_weight': 3, 'subsample': 0.8454567452256074}",64.79762563239707,27.056978289946073
+59,IE-20,1.0,lgb,"{'colsample_bytree': 4, 'learning_rate': 2, 'max_depth': 4, 'min_child_weight': 0, 'subsample': 0.873435861661023}",24.474385912046785,24.03103254173042
+60,IE-40,1.0,lgb,"{'colsample_bytree': 0, 'learning_rate': 4, 'max_depth': 8, 'min_child_weight': 4, 'subsample': 0.8180743356362025}",17.554365371330412,12.083677340154294
+61,IE-60,1.0,lgb,"{'colsample_bytree': 2, 'learning_rate': 3, 'max_depth': 9, 'min_child_weight': 0, 'subsample': 0.8952360379447746}",18.83892814611293,19.214132594752602
+62,Redry_Time,1.0,lgb,"{'colsample_bytree': 2, 'learning_rate': 4, 'max_depth': 7, 'min_child_weight': 4, 'subsample': 0.8679705160085597}",0.1679787243188934,0.19700016519876645
+63,Rp0,1.0,lgb,"{'colsample_bytree': 3, 'learning_rate': 3, 'max_depth': 7, 'min_child_weight': 6, 'subsample': 0.9168611986115364}",1242.632817580233,3468.48533596194
+64,Rm,1.0,cat,"{'colsample_bylevel': 4, 'learning_rate': 2, 'max_depth': 10}",81.01330424357792,82.51394559702635
+65,A5,1.0,cat,"{'colsample_bylevel': 1, 'learning_rate': 3, 'max_depth': 3}",3.598435242891072,3.7091792039489553
+66,Diffusible Hydrogen,1.0,cat,"{'colsample_bylevel': 4, 'learning_rate': 1, 'max_depth': 2}",0.6499364583831181,0.8120357819777497
+67,Moisture,1.0,cat,"{'colsample_bylevel': 4, 'learning_rate': 4, 'max_depth': 7}",0.01539400780140084,0.0187189073494726
+68,Yield strength,1.0,cat,"{'colsample_bylevel': 2, 'learning_rate': 2, 'max_depth': 10}",89.46931030447644,102.40962330521518
+69,Tensile,1.0,cat,"{'colsample_bylevel': 4, 'learning_rate': 0, 'max_depth': 2}",128.4111176009792,138.43613824146402
+70,Ferrite (Fn),1.0,cat,"{'colsample_bylevel': 3, 'learning_rate': 5, 'max_depth': 9}",1.0739997714568505,0.9456818310620618
+71,Elongation,1.0,cat,"{'colsample_bylevel': 4, 'learning_rate': 0, 'max_depth': 5}",5.107407668708791,6.030506981583372
+72,Charpy,1.0,cat,"{'colsample_bylevel': 0, 'learning_rate': 5, 'max_depth': 6}",20.129347414808176,16.317391552839105
+73,DIN_W,1.0,cat,"{'colsample_bylevel': 1, 'learning_rate': 0, 'max_depth': 6}",0.22933087108286393,0.2264065936173777
+74,HT_Temp,1.0,cat,"{'colsample_bylevel': 2, 'learning_rate': 5, 'max_depth': 9}",63.31478769733225,20.26338412129251
+75,IE-20,1.0,cat,"{'colsample_bylevel': 1, 'learning_rate': 5, 'max_depth': 3}",33.72051400170712,23.581811618422623
+76,IE-40,1.0,cat,"{'colsample_bylevel': 4, 'learning_rate': 5, 'max_depth': 9}",15.019496621141826,5.697951663845126
+77,IE-60,1.0,cat,"{'colsample_bylevel': 3, 'learning_rate': 0, 'max_depth': 7}",14.657449306796336,16.082664882330118
+78,Redry_Time,1.0,cat,"{'colsample_bylevel': 0, 'learning_rate': 2, 'max_depth': 10}",0.21814491371129613,0.20955344436045714
+79,Rp0,1.0,cat,"{'colsample_bylevel': 2, 'learning_rate': 2, 'max_depth': 0}",995.9415740683048,3355.0230016173678
