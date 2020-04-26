@@ -58,8 +58,8 @@ class _TodoScreenState extends State<TodoScreen> {
   void initState() {
     super.initState();
 
-    getData();
     getRainfall();
+    getData();
   }
 
   Future getProduceData() async {
@@ -262,7 +262,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                                     produce_names[index] +
                                                     " " +
                                                     ranges[index].toString() + " - ${total}"
-                                                    " inches",
+                                                    " in",
                                             style: TextStyle(
                                                 fontSize: 20.0,
                                                 fontWeight: FontWeight.w500),
@@ -284,14 +284,10 @@ class _TodoScreenState extends State<TodoScreen> {
   //TODO set up to get inches of rainfall predicted for the rest of the week
   Future<double> getRainfall() async {
     PermissionStatus status = await Permission.locationWhenInUse.status;
-    print(status);
     if (status.isUndetermined) {
       if (await Permission.locationWhenInUse.request().isGranted) {
         Position position = await Geolocator()
             .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-        print(position.latitude.toString() +
-            "     " +
-            position.longitude.toString());
         http.get(
             "https://api.climacell.co/v3/weather/forcase/hourly?lat=${position.latitude}&lon=${position.longitude}&unit_system=us",
             headers: {
@@ -311,26 +307,19 @@ class _TodoScreenState extends State<TodoScreen> {
         });
       }
     } else {
-      print('here');
       Position position = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      print(position.latitude.toString() +
-          "     " +
-          position.longitude.toString());
       http.get(
           "https://api.climacell.co/v3/weather/forecast/hourly?lat=${position.latitude}&lon=${position.longitude}&unit_system=us",
           headers: {
             'apikey': 'iTiPDrLOgggoGVXeDu2W5q7qjDP1Xmd6',
           }).then((value) {
         var data = json.decode(value.body);
-        print(data);
         total = 0;
         int ind = 0;
         int lastDay = DateTime.now().day;
         for (int i = 0; i < data.length; i++) {
           Weather weather = Weather.fromJson(data[i]);
-          print(
-              'Time: ${weather.observation_time} Precipitation: ${weather.precipitation_value} ${weather.precipitation_units}');
           total += weather.precipitation_value;
         }
       });
