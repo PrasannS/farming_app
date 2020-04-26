@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
 
@@ -30,7 +31,7 @@ class _PostPageState extends State<PostPage> {
   @override
   void initState() {
     super.initState();
-
+    getPosts();
   }
 
   getPosts() async {
@@ -50,16 +51,14 @@ class _PostPageState extends State<PostPage> {
     if (posts == null) {
       return Scaffold(
         body: Center(
-          child: Text(
-            'No Plants to sell',
-          ),
+          child: CircularProgressIndicator(),
         ),
       );
     }
     else {
       List<DocumentSnapshot> myPlants = new List();
       for (int i = 0; i < posts.documents.length; i++) {
-        if (posts.documents[i].data['uid'] == currentUserId) {
+        if (posts.documents[i].data['uid'] == currentUserId && !posts.documents[i].data['produce']) {
           myPlants.add(posts.documents[i]);
         }
       }
@@ -84,9 +83,9 @@ class _PostPageState extends State<PostPage> {
             itemCount: myPlants.length,
             itemBuilder: (context, i) {
               return ListTile(
-                title: myPlants[i].data['type'],
-                onTap: () {
-                  posts.documents[i].reference.updateData({
+                title: Text(myPlants[i].data['type']),
+                onTap: () async {
+                  await myPlants[i].reference.updateData({
                     'produce': true,
                   });
                   setState(() {
