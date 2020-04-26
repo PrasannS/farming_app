@@ -1,6 +1,6 @@
-
-import 'package:farming_app/data_storage.dart';
+import 'package:farming_app/screens/produce_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:farming_app/data_storage.dart';
 
 class ProduceMarket extends StatefulWidget {
   @override
@@ -9,11 +9,10 @@ class ProduceMarket extends StatefulWidget {
 
 class _ProduceMarketState extends State<ProduceMarket> {
 
-  Database data = new Database();
+  Database db = new Database();
 
   @override
   Widget build(BuildContext context) {
-
-    return data.dataPost(true);
+    return db.dataPost(true);
   }
 }

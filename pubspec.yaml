@@ -45,6 +45,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   simple_animations: ^1.3.3
   youtube_api: ^0.7.2
+  flutter_datetime_picker: ^1.3.8
 
 dev_dependencies:
   flutter_test:
