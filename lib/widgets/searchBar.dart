@@ -12,8 +12,8 @@ class _SearchBarState extends State<SearchBar> {
       padding: EdgeInsets.all(15),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blueGrey[50],
-          borderRadius: BorderRadius.all((Radius.circular(5.0)))
+            color: Colors.blueGrey[50],
+            borderRadius: BorderRadius.all((Radius.circular(5.0)))
         ),
         child: TextField(
           style: TextStyle(
