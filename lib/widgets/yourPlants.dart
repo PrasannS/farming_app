@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:farming_app/models/plant.dart';
 import 'package:farming_app/widgets/plantCard.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class YourPlants extends StatelessWidget {
 
-  final List<Plant> plants;
+  final List<DocumentSnapshot> plants;
 
 
   const YourPlants({Key key,this.plants}) : super(key: key);
@@ -20,9 +21,9 @@ class YourPlants extends StatelessWidget {
         itemCount: plants.length,
         itemBuilder: (_, index) {
           return PlantCard(
-            name: plants[index].name,
-            picture: plants[index].image,
-            progress: plants[index].progress/70.0,
+            name: plants[index].data['type'],
+            picture: plants[index].data['url'],
+            progress: 0/70.0,
           );
         },
       ),

@@ -62,7 +62,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
 
 
   _submit(BuildContext context) async {
-    Firestore.instance.collection('posts').add({
+    DocumentReference added = await Firestore.instance.collection('posts').add({
       'desc': _descriptionController.text.toString(),
       'datePlanted': _plantedDate,
       'produce': false,
@@ -71,6 +71,12 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
       'price': double.parse(_priceController.text.toString()),
       'units': int.parse(_numSeedsController.text.toString()),
       'url': 'placeholder',
+    });
+    DocumentSnapshot currentUser = await Firestore.instance.collection('users').document(currentUserId).get();
+    List<String> currentPosts = currentUser.data['posts'];
+    currentPosts.add(added.documentID);
+    Firestore.instance.collection('users').document(currentUserId).updateData({
+      'posts': currentPosts,
     });
     Navigator.pop(context);
 

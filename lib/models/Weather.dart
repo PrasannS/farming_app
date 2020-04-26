@@ -10,8 +10,8 @@ class Weather{
 
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
-      lat: json['lon'] as double,
-      lon: json['lat'] as double,
+      lat: json['lat'] as double,
+      lon: json['lon'] as double,
       precipitation_value: json['precipitation']['value'] + 0.0 as double,
       precipitation_units: json['precipitation']['units'] as String,
       precipitation_type: json['precipitation_type']['value'] as String,
