@@ -1,6 +1,7 @@
 import 'package:farming_app/screens/produce_market.dart';
 import 'package:farming_app/screens/restaurant_market.dart';
 import 'package:farming_app/screens/seed_market.dart';
+import 'package:farming_app/screens/post_page.dart';
 import 'package:flutter/material.dart';
 
 import 'checkout_screen.dart';
@@ -29,6 +30,15 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Marketplace', style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),),
+                IconButton(
+                  icon: Icon(Icons.add_circle_outline),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PostPage()),
+                    );
+                  },
+                ),
                 IconButton(
                   icon: Icon(Icons.shopping_cart, size: 30.0,),
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen())),
