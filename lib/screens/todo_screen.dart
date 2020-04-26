@@ -37,7 +37,6 @@ class _TodoScreenState extends State<TodoScreen> {
   double total;
   String currentUserId;
 
-  //TODO list of booleans to fil up, and string names of the produce. If smth is toPlant then it will take to YT Page
   List<bool> toPlant = [];
   List<String> produce_names = [];
   List<String> produce_id = new List();
@@ -56,8 +55,6 @@ class _TodoScreenState extends State<TodoScreen> {
     getData();
   }
 
-
-
   Future getProduceData() async {
     await FirebaseAuth.instance.currentUser().then((value) {
       currentUserId = value.uid;
@@ -73,10 +70,21 @@ class _TodoScreenState extends State<TodoScreen> {
             .collection('posts')
             .document(currentUser.data['posts'][i])
             .get();
-        if (!eachPost.data['planted']) {
+        if (!eachPost.data['produce']) {
           produce_names.add(eachPost.data['type']);
           toPlant.add(!eachPost.data['planted']);
           produce_id.add(eachPost.documentID);
+          if (!eachPost.data['planted']) {
+            icons.add(false);
+          }
+          else {
+            if (DateTime.now().difference(eachPost.data['watered'].toDate()).inDays >= 7) {
+              icons.add(false);
+            }
+            else {
+              icons.add(true);
+            }
+          }
         }
       }
     }

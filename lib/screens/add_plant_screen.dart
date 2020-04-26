@@ -75,7 +75,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
       'watered': DateTime.utc(2000),
     });
     DocumentSnapshot currentUser = await Firestore.instance.collection('users').document(currentUserId).get();
-    List<String> currentPosts = currentUser.data['posts'];
+    List<dynamic> currentPosts = currentUser.data['posts'];
     if (currentPosts==null)
       currentPosts = [];
     currentPosts.add(added.documentID);

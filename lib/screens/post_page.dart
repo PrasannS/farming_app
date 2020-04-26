@@ -60,9 +60,9 @@ class _PostPageState extends State<PostPage> {
       for (int i = 0; i < posts.documents.length; i++) {
         if (posts.documents[i].data['uid'] == currentUserId && !posts.documents[i].data['produce']) {
           myPlants.add(posts.documents[i]);
+          print(posts.documents[i].data['watered']);
         }
       }
-
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -84,6 +84,7 @@ class _PostPageState extends State<PostPage> {
             itemBuilder: (context, i) {
               return ListTile(
                 title: Text(myPlants[i].data['type']),
+                leading: Text("Planted at ${myPlants[i].data['datePlanted'].toDate().toLocal().toString()}"),
                 onTap: () async {
                   await myPlants[i].reference.updateData({
                     'produce': true,
