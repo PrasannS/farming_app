@@ -38,9 +38,14 @@ Future<List<double>> fetchWaterResult(String val) async {
   String url = 'http://192.168.0.52:5000/get_water?item='+val;
   Response response = await get(url);
 
+  print(response.body);
   var j = json.decode(response.body);
   List<double> result = [];
-  result = j['result'];
+  List<String>r = j['response'].cast<String>();
+  for (String s in r){
+    result.add(double.parse(s));
+  }
+
 
   return result;
 
