@@ -103,8 +103,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
                           return Container(
                             child: ListView.builder(
-                                itemCount: cartLength,
+                                itemCount: cart.length,
                                 itemBuilder: (BuildContext context, int i){
+                                  print(i);
                                   cost = cart[i]['price']*int.parse(quantity[i]);
                                   if(snapshot.connectionState!=ConnectionState.done){
                                     print('loading');
