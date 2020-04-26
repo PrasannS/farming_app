@@ -1,5 +1,6 @@
 import 'package:farming_app/screens/listings_page.dart';
 import 'package:farming_app/screens/sales_page.dart';
+import 'package:farming_app/screens/signup_screen.dart';
 import 'package:farming_app/widgets/open_listings.dart';
 import 'package:farming_app/widgets/profile_bar.dart';
 import 'package:farming_app/widgets/recent_purchases.dart';
@@ -14,7 +15,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
 
   int pageIndex = 0;
-  //List<Widget> pages = [SalesPage(), ListingsPage()];
+  List<Widget> pages = [SalesPage(), ListingsPage()];
   PageController _pageController = new PageController();
 
   @override
@@ -135,8 +136,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontSize: 20.0,
                           fontWeight: pageIndex == 0 ? FontWeight.bold
                               : FontWeight.w400,
-                          // decoration: pageIndex == 0 ? TextDecoration.underline
-                          //     : TextDecoration.none
+                           //decoration: pageIndex == 0 ? TextDecoration.underline
+                           //    : TextDecoration.none
                         ),
                       ),
                     ),
@@ -146,7 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         setState(() {
                           pageIndex = 1;
                           _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.linear);
-                          //Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
                         });
                       },
                       child: Text(
@@ -155,15 +156,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontSize: 20.0,
                           fontWeight: pageIndex == 1 ? FontWeight.bold
                               : FontWeight.w400,
-                          // decoration: pageIndex == 1 ? TextDecoration.underline
-                          //     : TextDecoration.none
+                           //decoration: pageIndex == 1 ? TextDecoration.underline
+                             //  : TextDecoration.none
                         ),
                       ),
                     ),
                     SizedBox(width: 20.0,),
                     /*Expanded(
                       child: PageView(
-                        //children: pages,
+                        children: pages,
                         controller: _pageController,
                         physics: NeverScrollableScrollPhysics(),
 
