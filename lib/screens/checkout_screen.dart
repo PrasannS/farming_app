@@ -231,6 +231,37 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                                   FontWeight
                                                                       .w400),
                                                         ),
+                                                        SizedBox(
+                                                          height: 10.0,
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            IconButton(
+                                                              icon: Icon(Icons.remove),
+                                                              onPressed: () async {
+                                                                  cartQuantity[i]--;
+                                                                  currentUser.reference.updateData({
+                                                                    'cartQuantity': cartQuantity,
+                                                                  });
+                                                                  setState(() {
+
+                                                                  });
+                                                              },
+                                                            ),
+                                                            IconButton(
+                                                              icon: Icon(Icons.add),
+                                                              onPressed: () {
+                                                                cartQuantity[i]++;
+                                                                currentUser.reference.updateData({
+                                                                  'cartQuantity': cartQuantity
+                                                                });
+                                                                setState(() {
+
+                                                                });
+                                                              },
+                                                            )
+                                                          ],
+                                                        )
                                                       ],
                                                     ),
                                                   ),
