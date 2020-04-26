@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
             WelcomeBar(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text('Farm with Friends',
+              child: Text('Farm with Friends', maxLines: 1,
               style: TextStyle(
                 fontSize: 45, color: Colors.black.withOpacity(0.5),
                 fontWeight: FontWeight.bold,
