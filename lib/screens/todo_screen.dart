@@ -169,7 +169,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                     icon: Icon(Icons.radio_button_unchecked),
                                     onPressed: (){
                                       //TODO What happens when a task is completed?
-                                      
+
                                     },
                                   ),
                                   GestureDetector(
