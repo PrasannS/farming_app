@@ -95,7 +95,7 @@ class Database{
                                             SizedBox(height: 10.0,),
                                             Text(docs[i]['desc'], style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
                                             SizedBox(height: 15.0,),
-                                            Text('\$${docs[i]['price']}/gram', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                                            Text('\$${docs[i]['price']}/unit', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                                             SizedBox(height: 15.0,),
                                             Text('10 - 20 days to grow', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),)
                                           ],

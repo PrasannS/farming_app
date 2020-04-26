@@ -22,12 +22,6 @@ class _PostPageState extends State<PostPage> {
   String currentUserId;
   QuerySnapshot posts;
 
-  _submit(BuildContext context) async {
-    print("Starting to submit");
-
-    Navigator.pop(context);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -70,28 +64,18 @@ class _PostPageState extends State<PostPage> {
           leading: BackButton(
             color: Colors.black,
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.add),
-              iconSize: 30.0,
-              color: Colors.black,
-              onPressed: () => _submit(context),
-            ),
-          ],
         ),
         body: ListView.builder(
             itemCount: myPlants.length,
             itemBuilder: (context, i) {
               return ListTile(
-                title: Text(myPlants[i].data['type']),
-                leading: Text("Planted at ${myPlants[i].data['datePlanted'].toDate().toLocal().toString()}"),
+                leading: Text(myPlants[i].data['type']),
+                title: Text("Planted at ${myPlants[i].data['datePlanted'].toDate().toLocal().toString()}"),
                 onTap: () async {
                   await myPlants[i].reference.updateData({
                     'produce': true,
                   });
-                  setState(() {
-
-                  });
+                  Navigator.pop(context);
                 },
               );
             }),

@@ -71,7 +71,7 @@ class _AddPlantScreenState extends State<AddPlantScreen> {
       'type': _captionController.text.toString(),
       'price': double.parse(_priceController.text.toString()),
       'units': int.parse(_numSeedsController.text.toString()),
-      'url': 'placeholder',
+      'url': 'https://images.pexels.com/photos/1458694/pexels-photo-1458694.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
       'watered': DateTime.utc(2000),
     });
     DocumentSnapshot currentUser = await Firestore.instance.collection('users').document(currentUserId).get();
