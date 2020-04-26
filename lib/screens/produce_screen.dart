@@ -33,20 +33,27 @@ class _ProduceScreenState extends State<ProduceScreen> {
       name = value['name'];
       address = value['address'];
     });
+    return Firestore.instance.collection('posts').document(currentPostID).get();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firestore.instance.collection('posts').document(currentPostID).get(),
+      future: loadData(),
       builder: (context, snapshot) {
-        loadData();
         if(snapshot.connectionState!=ConnectionState.done){
-          return Container(
-            width: 150,
-            height: 150,
-            margin: EdgeInsets.all(5),
-            child: CircularProgressIndicator(),
+          return Material(
+            color: Colors.white,
+            child: Center(
+              child: SizedBox(
+                width: 100,
+                height: 100,
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ),
           );
         }
         else{
@@ -90,7 +97,7 @@ class _ProduceScreenState extends State<ProduceScreen> {
                     children: [
                       Text(snapshot.data['type'].toString(), style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),),
                       SizedBox(height: 10.0,),
-                      Text(snapshot.data['name'].toString(), style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),),
+                      Text(name.toString(), style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),),
                       SizedBox(height: 10.0,),
                       Text(address.toString(), style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                       SizedBox(height: 10.0,),

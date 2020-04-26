@@ -13,7 +13,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   List<dynamic> inCart;
   List<String> quantity;
-  double totalCost = 0;
 
   Future<QuerySnapshot> loadDatabase() async {
     quantity = new List<String>();
@@ -28,9 +27,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     for(int i=0;i<inCart.length;i+=2){
       print("TEST2");
       await Firestore.instance.collection('posts').document(inCart[i]).get().then((value) {
-        for(int e=1;e<inCart.length;e+=2){
-          totalCost+=value.data['price']*value.data['units'];
-        }
       });
     }
     QuerySnapshot query = await Firestore.instance.collection('posts').getDocuments();
@@ -44,6 +40,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double totalCost = 0;
     return Scaffold(
       backgroundColor: Colors.black26,
       body: Column(
@@ -100,24 +97,32 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             cart.add(snapshot.data.documents[i]);
                           }
                           double cost;
-                          print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                          print('pass');
                           return Container(
                             child: ListView.builder(
                                 itemCount: cart.length,
                                 itemBuilder: (BuildContext context, int i){
                                   print(i);
                                   cost = cart[i]['price']*int.parse(quantity[i]);
+                                  totalCost+=cost;
                                   if(snapshot.connectionState!=ConnectionState.done){
                                     print('loading');
-                                    return Container(
-                                      width: 150,
-                                      height: 150,
-                                      margin: EdgeInsets.all(5),
-                                      child: CircularProgressIndicator(),
+                                    return Material(
+                                      color: Colors.white,
+                                      child: Center(
+                                        child: SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                          child: Container(
+                                            margin: EdgeInsets.all(5),
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
+                                      ),
                                     );
                                   }
                                   else if(cart.length>0){
-                                    print('youuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+                                    print('print');
                                     return Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: Container(
@@ -154,6 +159,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                   ),
                                                   FlatButton(
                                                     onPressed: () {
+                                                      currentPostID = cart[i].documentID;
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(builder: (context) => ProduceScreen()),
@@ -167,7 +173,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                                           children: [
                                                             Text(cart[i]['type'].toString(), style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
                                                             SizedBox(height: 10.0,),
-                                                            Text(round.format(cost).toString(), style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
+                                                            Text('\$'+round.format(cost).toString(), style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
                                                           ],
                                                         ),
                                                       ),
