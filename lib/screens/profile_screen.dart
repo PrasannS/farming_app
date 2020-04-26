@@ -1,6 +1,5 @@
 import 'package:farming_app/screens/listings_page.dart';
 import 'package:farming_app/screens/sales_page.dart';
-import 'package:farming_app/screens/signup_screen.dart';
 import 'package:farming_app/widgets/open_listings.dart';
 import 'package:farming_app/widgets/profile_bar.dart';
 import 'package:farming_app/widgets/recent_purchases.dart';
@@ -76,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(height: 10,),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -118,6 +117,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 SizedBox(height: 20,),
+                /*Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Listings',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: pageIndex == 0 ? FontWeight.bold
+                            : FontWeight.w400,
+                        // decoration: pageIndex == 0 ? TextDecoration.underline
+                        //     : TextDecoration.none
+                      ),
+                    ),
+                    Text(
+                      'Recent Sales',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: pageIndex == 1 ? FontWeight.bold
+                            : FontWeight.w400,
+                        // decoration: pageIndex == 1 ? TextDecoration.underline
+                        //     : TextDecoration.none
+                      ),
+                    ),
+                  ],
+                ), */
+                SizedBox(height: 0,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -136,8 +161,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontSize: 20.0,
                           fontWeight: pageIndex == 0 ? FontWeight.bold
                               : FontWeight.w400,
-                           //decoration: pageIndex == 0 ? TextDecoration.underline
-                           //    : TextDecoration.none
+                          // decoration: pageIndex == 0 ? TextDecoration.underline
+                          //     : TextDecoration.none
                         ),
                       ),
                     ),
@@ -147,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         setState(() {
                           pageIndex = 1;
                           _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.linear);
-                          Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
+                          //Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
                         });
                       },
                       child: Text(
@@ -156,12 +181,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           fontSize: 20.0,
                           fontWeight: pageIndex == 1 ? FontWeight.bold
                               : FontWeight.w400,
-                           //decoration: pageIndex == 1 ? TextDecoration.underline
-                             //  : TextDecoration.none
+                          // decoration: pageIndex == 1 ? TextDecoration.underline
+                          //     : TextDecoration.none
                         ),
                       ),
                     ),
                     SizedBox(width: 20.0,),
+
                     /*Expanded(
                       child: PageView(
                         children: pages,
@@ -172,6 +198,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     )*/
                   ],
                 ),
+                SizedBox(height: 20,),
+                SalesPage(),
+                SizedBox(height: 10),
+                ListingsPage(),
               ],
             ),
           )

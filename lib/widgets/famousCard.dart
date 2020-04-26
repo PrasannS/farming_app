@@ -12,14 +12,21 @@ class FamousCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 200,
       child: Row(
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
+              child: picture==null?Image.asset(
                 "assets/images/donald.jpg",
+                height: 90,
+                width: 70,
+                fit: BoxFit.cover,
+              ):
+              Image.network(
+                picture,
                 height: 90,
                 width: 70,
                 fit: BoxFit.cover,

@@ -1,11 +1,12 @@
 import 'dart:convert';
 
+import 'package:farming_app/api_client/api_client.dart';
+import 'package:farming_app/screens/videos_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 import 'package:farming_app/models/Weather.dart';
 
@@ -15,12 +16,35 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  List tasks = ['water the tomatos', 'plant the tpotatoes', 'water the weed', 'harvest the weed', 'water the tomatos', 'plant the tpotatoes', 'water the weed', 'harvest the weed'];
+  List dayTasks = ['water the tomatos', 'plant the tpotatoes', 'water the weed', 'harvest the weed', 'water the tomatos', 'plant the tpotatoes', 'water the weed', 'harvest the weed'];
+  List weekTasks = ['weektask1', 'weektask12', 'weektask3', 'weektask4', 'weektask5'];
+  List monthTasks = ['monthTask1', 'monthTask2', 'monthTask3', 'monthTask4', 'monthTask5'];
   int pageIndex = 0;
+
+  //TODO list of booleans to fil up, and string names of the produce. If smth is toPlant then it will take to YT Page
+  List<bool> toPlant = [];
+  List<String> produce_names = [];
+
+  //ranges of how much water to give.
+  List<List<double>> ranges = [];
+  bool fullyloaded = false;
+
+
+  //TODO execute this once you get produce_names and toPlant arrays
+  Future getRanges () async{
+    for (int i = 0; i<toPlant.length; i++){
+      await fetchWaterResult(produce_names[i]).then((value){
+        setState(() {
+          ranges.add(value);
+        });
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green,
       body: Column(
         children: [
           Padding(
@@ -37,7 +61,7 @@ class _TodoScreenState extends State<TodoScreen> {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.white,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)),
               ),
               child: Column(
@@ -47,53 +71,101 @@ class _TodoScreenState extends State<TodoScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text('Today', style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: pageIndex == 0 ? FontWeight.bold
-                            : FontWeight.w400,
-                        // decoration: pageIndex == 1 ? TextDecoration.underline
-                        //     : TextDecoration.none
-                      ),),
-                      Text('Week', style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: pageIndex == 1 ? FontWeight.bold
-                            : FontWeight.w400,
-                        // decoration: pageIndex == 1 ? TextDecoration.underline
-                        //     : TextDecoration.none
-                      ),),
-                      Text('Month', style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: pageIndex == 2 ? FontWeight.bold
-                            : FontWeight.w400,
-                        // decoration: pageIndex == 1 ? TextDecoration.underline
-                        //     : TextDecoration.none
+                      GestureDetector(
+                        onTap:(){
+                          setState(() {
+                            pageIndex = 0;
+                          });
+                        },
+                        child: Text('Today', style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: pageIndex == 0 ? FontWeight.bold
+                              : FontWeight.w400,
+                          // decoration: pageIndex == 1 ? TextDecoration.underline
+                          //     : TextDecoration.none
+                        ),),
                       ),
+                      GestureDetector(
+                        onTap:(){
+                          setState(() {
+                            pageIndex = 1;
+                          });
+                        },
+                        child: Text('Week', style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: pageIndex == 1 ? FontWeight.bold
+                              : FontWeight.w400,
+                          // decoration: pageIndex == 1 ? TextDecoration.underline
+                          //     : TextDecoration.none
+                        ),),
+                      ),
+                      GestureDetector(
+                        onTap:(){
+                          setState(() {
+                            pageIndex = 2;
+                          });
+                        },
+                        child: Text('Month', style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: pageIndex == 2 ? FontWeight.bold
+                              : FontWeight.w400,
+                          // decoration: pageIndex == 1 ? TextDecoration.underline
+                          //     : TextDecoration.none
+                        ),
+                        ),
                       ),
                     ],
                   ),
 
-                  Expanded(
+                  SizedBox(height: 10.0,),
+                  Divider(thickness: 3.0,),
+
+                  fullyloaded?Expanded(
                     child: ListView.builder(
-                      itemCount: tasks.length,
+                      itemCount: toPlant.length,
                         itemBuilder: (BuildContext context, int index){
                           return Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
-                              color: Colors.red,
+                              decoration: BoxDecoration(
+
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30.0),
+                                  boxShadow: [
+                              BoxShadow(
+                              color: Colors.grey.withOpacity(0.8),
+                              blurRadius: 3.0, // has the effect of softening the shadow
+                              spreadRadius: 1.0, // has the effect of extending the shadow
+                              offset: Offset(
+                                4.0, // horizontal, move right 10
+                                4.0, // vertical, move down 10
+                              ),
+                                ),]
+                              ),
                               height: 50.0,
                               child: Row(
                                 children: [
                                   IconButton(
                                     icon: Icon(Icons.radio_button_unchecked),
+                                    onPressed: (){
+                                      //TODO What happens when a taks is completed?
+                                    },
                                   ),
+                                  GestureDetector(
+                                    onTap: toPlant[index]?(){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => VideosPage(item: produce_names[index],)),
+                                      );
+                                    }:null,
+                                      child: Text(dayTasks[index], style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),)),
                                 ],
                               ),
                             ),
                           );
                         }
-
-                    ),
-                  ),
+                    )
+                  ):Center(child:CircularProgressIndicator()),
 
                 ],
               ),

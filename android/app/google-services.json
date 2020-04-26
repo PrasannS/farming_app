@@ -30,6 +30,13 @@
             {
               "client_id": "210209959346-fmqomp5no247n2ea2rrof270fepnvh6f.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "210209959346-lkso7um3maaj7sjkbkubqql714qvv9lf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.crhsidea.farmingapp"
+              }
             }
           ]
         }

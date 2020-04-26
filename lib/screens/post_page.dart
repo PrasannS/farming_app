@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
 
@@ -18,47 +19,51 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
 
-
-
-  File _image;
-  TextEditingController _captionController = TextEditingController();
-  String _caption = '';
-  String description="Freshly grown red tomatoes that taste like red tomatos! Very juicy and fresh!";
-
-  void initState() {
-    super.initState();
-  }
-
-
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      _image = image;
-    });
-
-    await uploadImage();
-  }
-
-  Future uploadImage() async {
-
-  }
-
-
+  String currentUserId;
+  QuerySnapshot posts;
 
   _submit(BuildContext context) async {
     print("Starting to submit");
 
     Navigator.pop(context);
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    getPosts();
+  }
+
+  getPosts() async {
+    FirebaseAuth.instance.currentUser().then((value) {
+      currentUserId = value.uid;
+    });
+    QuerySnapshot hold = await Firestore.instance.collection('posts').getDocuments();
+    setState(() {
+      posts = hold;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    if (posts == null) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    else {
+      List<DocumentSnapshot> myPlants = new List();
+      for (int i = 0; i < posts.documents.length; i++) {
+        if (posts.documents[i].data['uid'] == currentUserId && !posts.documents[i].data['produce']) {
+          myPlants.add(posts.documents[i]);
+        }
+      }
 
-    return Scaffold(
+      return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0.0,
@@ -74,60 +79,23 @@ class _PostPageState extends State<PostPage> {
             ),
           ],
         ),
-        body: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: Column(
-                children: <Widget>[
-                  GestureDetector(
-                    onTap: getImage,
-                    child: Container(
-                      height: width,
-                      width: width,
-                      color: Colors.grey[300],
-                      child: _image == null
-                          ? Icon(
-                        Icons.add_a_photo,
-                        color: Colors.white70,
-                        size: 150.0,
-                      )
-                          : Image(
-                        image: FileImage(_image),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.0),
-                    child: TextField(
-                      controller: _captionController,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        labelText: 'Caption',
-                      ),
-                      onChanged: (input) => description = input,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        )
-    );
+        body: ListView.builder(
+            itemCount: myPlants.length,
+            itemBuilder: (context, i) {
+              return ListTile(
+                title: Text(myPlants[i].data['type']),
+                onTap: () async {
+                  await myPlants[i].reference.updateData({
+                    'produce': true,
+                  });
+                  setState(() {
+
+                  });
+                },
+              );
+            }),
+      );
+    }
   }
 
 }
-
-/*
-FlatButton(
-        child: Text('Take PICTURE'),
-        onPressed:(){
-          getImage();
-          _submit(context);
-        },
-      ),
-
- */

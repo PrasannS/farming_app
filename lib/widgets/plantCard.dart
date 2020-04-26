@@ -1,15 +1,15 @@
 import 'package:farming_app/screens/plant_details.dart';
+import 'package:farming_app/screens/plantinfo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class PlantCard extends StatelessWidget {
 
   final String name;
-  final double price;
   final String picture;
   final double progress;
 
-  const PlantCard({Key key, this.name, this.price, this.picture, this.progress}) : super(key: key);
+  const PlantCard({Key key, this.name, this.picture, this.progress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class PlantCard extends StatelessWidget {
       padding: EdgeInsets.all(4),
       child: InkWell(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (_)=> PlantDetails()));
+          Navigator.push(context, MaterialPageRoute(builder: (_)=> PlantInfoScreen()));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -33,10 +33,12 @@ class PlantCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Stack(
               children: [
-                Image.asset("assets/images/weed.jpg",
-                height: 220,
-                width: 200,
-                fit: BoxFit.cover,),
+                Image.network(
+                  picture,
+                  height: 220,
+                  width: 200,
+                  fit: BoxFit.cover,
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
