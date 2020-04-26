@@ -13,7 +13,8 @@ class ProduceScreen extends StatefulWidget {
 class _ProduceScreenState extends State<ProduceScreen> {
   int amount = 1;
   DocumentSnapshot post;
-  DocumentSnapshot user;
+  DocumentSnapshot currentUser;
+  DocumentSnapshot produceSeller;
   String uid;
 
   @override
@@ -23,25 +24,23 @@ class _ProduceScreenState extends State<ProduceScreen> {
   }
 
   loadData() async {
-    FirebaseAuth.instance.currentUser().then((currentUser) {
+    await FirebaseAuth.instance.currentUser().then((currentUser) {
       uid = currentUser.uid;
     });
     post = await Firestore.instance
         .collection('posts')
         .document(widget.postId)
         .get();
-    DocumentSnapshot hold = await Firestore.instance
-        .collection('users')
-        .document(post.data['uid'])
-        .get();
+    currentUser = await Firestore.instance.collection('users').document(uid).get();
+    DocumentSnapshot hold = await Firestore.instance.collection('users').document(post.data['uid']).get();
     setState(() {
-      user = hold;
+      produceSeller = hold;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (user == null) {
+    if (produceSeller == null) {
       return Material(
         color: Colors.white,
         child: Center(
@@ -55,7 +54,8 @@ class _ProduceScreenState extends State<ProduceScreen> {
           ),
         ),
       );
-    } else {
+    }
+     else {
       return Scaffold(
         body: Column(
           children: [
@@ -125,7 +125,7 @@ class _ProduceScreenState extends State<ProduceScreen> {
                     height: 10.0,
                   ),
                   Text(
-                    user.data['name'],
+                    produceSeller.data['name'],
                     style:
                         TextStyle(fontSize: 25.0, fontWeight: FontWeight.w400),
                   ),
@@ -133,7 +133,7 @@ class _ProduceScreenState extends State<ProduceScreen> {
                     height: 10.0,
                   ),
                   Text(
-                    user.data['address'],
+                    produceSeller.data['address'],
                     style:
                         TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),
                   ),
@@ -215,14 +215,17 @@ class _ProduceScreenState extends State<ProduceScreen> {
                                       icon: Icon(Icons.add_circle_outline),
                                       iconSize: 30.0,
                                       onPressed: () {
-                                        List<dynamic> cartItems = user.data['cartItems'];
-                                        List<dynamic> cartQuantity = user.data['cartQuantity'];
+                                        List<dynamic> cartItems = currentUser.data['cartItems'];
+                                        List<dynamic> cartQuantity = currentUser.data['cartQuantity'];
                                         bool alreadyInCart = false;
+                                        print(cartItems);
+                                        print(post.documentID);
                                         if (cartItems != null) {
                                           for (int i = 0; i < cartItems.length; i++) {
                                             if (cartItems[i] == post.documentID) {
                                               cartQuantity[i] += amount;
                                               alreadyInCart = true;
+                                              print(cartQuantity[i]);
                                               break;
                                             }
                                           }
