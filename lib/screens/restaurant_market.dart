@@ -1,21 +1,21 @@
-import 'package:farming_app/screens/produce_screen.dart';
+import 'package:farming_app/screens/restaurant_screen.dart';
 import 'package:flutter/material.dart';
 
-class SeedMarket extends StatefulWidget {
+class RestaurantMarket extends StatefulWidget {
   @override
-  _SeedMarketState createState() => _SeedMarketState();
+  _RestaurantMarketState createState() => _RestaurantMarketState();
 }
 
-class _SeedMarketState extends State<SeedMarket> {
-  List names = ['tomatoes', 'potatoes', 'weed'];
-
+class _RestaurantMarketState extends State<RestaurantMarket> {
   @override
   Widget build(BuildContext context) {
+    List names = ['mcdonalds', 'china cottage', 'weed store'];
+
     return ListView.builder(
         itemCount: names.length,
         itemBuilder: (BuildContext context, int index){
           return GestureDetector(
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ProduceScreen())),
+            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => RestaurantScreen())),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
@@ -46,7 +46,7 @@ class _SeedMarketState extends State<SeedMarket> {
                             width: 160.0,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(30.0),
-                              child: Image.asset('assets/img/seeds.jpg', fit: BoxFit.cover,
+                              child: Image.asset('assets/img/mcdonalds.png', fit: BoxFit.cover,
                               ),
                             ),
                           ),
@@ -55,13 +55,12 @@ class _SeedMarketState extends State<SeedMarket> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Sunflower Seeds', style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
+                                Text(names[index], style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w400),),
                                 SizedBox(height: 10.0,),
-                                Text('Sunflower seeds that will grow into sunflowers', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
+                                Text('Needs tomatoes, potatoes, and weed', style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w400),),
                                 SizedBox(height: 15.0,),
-                                Text('\$20/gram', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
+                                Text('5 crop minimum', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w400),),
                                 SizedBox(height: 15.0,),
-                                Text('10 - 20 days to grow', style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w400),)
                               ],
                             ),
                           )

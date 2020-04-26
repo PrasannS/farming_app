@@ -1,4 +1,5 @@
 import 'package:farming_app/screens/produce_market.dart';
+import 'package:farming_app/screens/restaurant_market.dart';
 import 'package:farming_app/screens/seed_market.dart';
 import 'package:flutter/material.dart';
 
@@ -11,9 +12,11 @@ class MarketplaceScreen extends StatefulWidget {
 
 class _MarketplaceScreenState extends State<MarketplaceScreen> {
 
+
+  List<Widget> pages = [SeedMarket(), ProduceMarket(), RestaurantMarket()];
   int pageIndex = 0;
-  List<Widget> pages = [SeedMarket(), ProduceMarket()];
-  PageController _pageController = new PageController();
+  PageController _pageController = new PageController(initialPage: 0);
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,8 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
 
           SizedBox(height: 25.0,),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
                 onTap: () {
@@ -56,7 +60,6 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                   ),
                 ),
               ),
-              SizedBox(width: 100.0,),
               GestureDetector(
                 onTap: (){
                   setState(() {
@@ -76,7 +79,26 @@ class _MarketplaceScreenState extends State<MarketplaceScreen> {
                   ),
                 ),
               ),
-              SizedBox(width: 20.0,),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    pageIndex = 2;
+                    _pageController.animateToPage(pageIndex, duration: Duration(milliseconds: 300), curve: Curves.linear);
+                    //Navigator.push(context, MaterialPageRoute(builder: (_) => SignupScreen()));
+                  });
+                },
+                child: Text(
+                  'Restaurants',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: pageIndex == 2 ? FontWeight.bold
+                        : FontWeight.w400,
+                    // decoration: pageIndex == 1 ? TextDecoration.underline
+                    //     : TextDecoration.none
+                  ),
+                ),
+              ),
+
             ],
           ),
           SizedBox(height: 20.0,),
