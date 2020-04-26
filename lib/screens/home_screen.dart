@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         if (userB.data['posts'] != null) {
           userBPlanted = userB.data['posts'].length;
         }
-        return (userAPlanted - userBPlanted);
+        return (userBPlanted - userAPlanted);
       });
       setState(() {
         usersloaded = true;
