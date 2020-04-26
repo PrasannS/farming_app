@@ -21,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                'Recent Sells & Purchases',
+                'Recent Sales & Purchases',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
